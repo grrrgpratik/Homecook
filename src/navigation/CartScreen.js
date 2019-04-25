@@ -5,7 +5,7 @@ class CartScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>CartScreen</Text>
+        <Text style={{ color: "black" }}>CartScreen</Text>
       </View>
     );
   }

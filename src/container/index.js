@@ -1,6 +1,6 @@
 import _MyToast from "./MyToast";
-import _MyNetInfo from './MyNetInfo';
-import _Login from './Login';
+import _MyNetInfo from "./MyNetInfo";
+import _Login from "./Login";
 import _Welcome from "./Welcome";
 import _Signup from "./Signup";
 

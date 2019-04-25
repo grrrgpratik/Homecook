@@ -5,7 +5,7 @@ class SearchScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>SearchScreen</Text>
+        <Text style={{ color: "black" }}>SearchScreen</Text>
       </View>
     );
   }

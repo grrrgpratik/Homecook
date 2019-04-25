@@ -10,7 +10,7 @@ class Router extends PureComponent {
   render() {
     return (
       <View style={Styles.app}>
-        <StatusBar barStyle="dark-content" backgroundColor="black" />
+        <StatusBar barStyle="light-content" backgroundColor="#fff" />
         <MyToast />
         <Navigation />
         <MyNetInfo />

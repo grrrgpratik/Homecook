@@ -5,7 +5,7 @@ class OrderScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>OrderScreen</Text>
+        <Text style={{color:"black"}}>OrderScreen</Text>
       </View>
     );
   }
