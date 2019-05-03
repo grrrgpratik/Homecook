@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -10,33 +10,33 @@ import {
   Animated,
   TouchableOpacity,
   ImageBackground
-} from 'react-native';
-import { Color, Images } from 'common_f';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Octicons from 'react-native-vector-icons/Octicons';
-import styles from './styles';
+} from "react-native";
+import { Color, Images } from "common_f";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Octicons from "react-native-vector-icons/Octicons";
+import styles from "./styles";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const ENTRIES1 = [
   {
-    title: 'Momo Chicken',
-    subtitle: 'Rs 150',
+    title: "Momo Chicken",
+    subtitle: "Rs 150",
     illustration: Images.ChickenMomo
   },
   {
-    title: 'Biryani Chicken',
+    title: "Biryani Chicken",
     subtitle:
-      'Biryani, is a mixed rice dish with its origins among the Muslims of the Indian subcontinent.',
+      "Biryani, is a mixed rice dish with its origins among the Muslims of the Indian subcontinent.",
     illustration: Images.BiryaniChicken
   },
   {
-    title: 'Buff Samaya Baji Set',
-    subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+    title: "Buff Samaya Baji Set",
+    subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
     illustration: Images.BuffSamayaBaji
   },
   {
-    title: 'Chicken sandwich',
-    subtitle: 'Lorem ipsum dolor sit amet',
+    title: "Chicken sandwich",
+    subtitle: "Lorem ipsum dolor sit amet",
     illustration: Images.AlooDum
   }
 ];
@@ -45,89 +45,89 @@ const mocks = [
   {
     id: 1,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: true,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Santorini',
+    title: "Santorini",
     description:
-      'Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC',
+      "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC",
     rating: 4.3,
     price: 224.0,
     reviews: 3212,
     preview:
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 2,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: false,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Loutraki',
-    description: 'This attractive small town, 80 kilometers from Athens',
+    title: "Loutraki",
+    description: "This attractive small town, 80 kilometers from Athens",
     rating: 4.6,
     reviews: 3212,
     price: 122.0,
     preview:
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 3,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: true,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Santorini',
-    description: 'Santorini - Description',
+    title: "Santorini",
+    description: "Santorini - Description",
     rating: 3.2,
     reviews: 3212,
     price: 432.0,
     preview:
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 4,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Loutraki',
-    description: 'This attractive small town, 80 kilometers from Athens',
+    title: "Loutraki",
+    description: "This attractive small town, 80 kilometers from Athens",
     rating: 5,
     reviews: 3212,
     price: 400.0,
     preview:
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
     ]
   }
 ];
@@ -146,16 +146,23 @@ class Home extends Component {
     return (
       <View style={styles.headerContainer}>
         <View style={styles.header}>
-          <View
-            style={{
-              flex: 2,
-              flexDirection: 'row',
-              paddingBottom: 5
-            }}
-          >
+          <View style={styles.headerView}>
             <View style={styles.options}>
               <Text style={styles.locationText}>Your Location</Text>
-              <Text style={styles.actualLocation}>Ranipauwa</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center"
+                }}
+              >
+                <Text style={styles.actualLocation}>Ranipauwa</Text>
+                <FontAwesome
+                  name="chevron-down"
+                  size={16 * 0.75}
+                  color={Color.black}
+                  style={{ marginLeft: 6, marginTop: 4 }}
+                />
+              </View>
             </View>
           </View>
           <View style={styles.settings}>
@@ -176,17 +183,17 @@ class Home extends Component {
             <Text style={styles.viewAllText}>View all</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: "column" }}>
           <FlatList
             horizontal
             pagingEnabled
             scrollEnabled
             showsHorizontalScrollIndicator={false}
-            decelerationRate='normal'
+            decelerationRate="normal"
             scrollEventThrottle={100}
             snapToInterval={width - 60}
-            snapToAlignment='center'
-            style={{ overflow: 'visible' }}
+            snapToAlignment="center"
+            style={{ overflow: "visible" }}
             data={mocks}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) =>
@@ -216,11 +223,27 @@ class Home extends Component {
           />
         </View>
         <View style={[styles.bottomContainer, styles.shadow]}>
-          <Text style={styles.recommendationTitle}>{item.title}</Text>
-          <Text style={styles.recommendlocation}>{item.location}</Text>
+          <Text style={styles.recommendationTitle}>{item.title} </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.recommendlocation}>
+              Rs. {Number(item.price)}
+            </Text>
+            <View
+              style={{
+                marginVertical: 6,
+                marginLeft: 4,
+                marginRight: 2,
+                width: 4,
+                height: 4,
+                borderRadius: 6,
+                backgroundColor: Color.black
+              }}
+            />
+            <Text style={styles.recommendlocation}> {item.location}</Text>
+          </View>
           <View style={styles.recommendRating}>
             {this.renderRatings(item.rating)}
-            <Text style={styles.recommendPrice}>Rs. {Number(item.price)}</Text>
+            <Text style={styles.recommendPrice}>880 ratings</Text>
           </View>
         </View>
       </View>
@@ -233,11 +256,11 @@ class Home extends Component {
       const activeStar = Math.floor(rating) >= index + 1;
       return (
         <FontAwesome
-          name='star'
+          name="star"
           key={`star-${index}`}
           size={14}
-          color={Color[activeStar ? 'tertiary' : 'gray']}
-          style={{ justifyContent: 'space-evenly' }}
+          color={Color[activeStar ? "tertiary" : "gray"]}
+          style={{ justifyContent: "space-evenly" }}
         />
       );
     });
@@ -251,11 +274,11 @@ class Home extends Component {
           pagingEnabled
           scrollEnabled
           showsHorizontalScrollIndicator={false}
-          decelerationRate='normal'
+          decelerationRate="normal"
           scrollEventThrottle={100}
           // snapToInterval={width - 40}
-          snapToAlignment='center'
-          style={{ overflow: 'visible' }}
+          snapToAlignment="center"
+          style={{ overflow: "visible" }}
           data={ENTRIES1}
           keyExtractor={(item, index) => `${item.title}`}
           onScroll={Animated.event([
@@ -269,26 +292,26 @@ class Home extends Component {
   };
 
   renderCarousel = item => {
-    console.log('inside render', item);
+    console.log("inside render", item);
     return (
       <TouchableWithoutFeedback style={[styles.shadow, { elevation: 4 }]}>
         <View style={{ marginBottom: 35 }}>
           <Image
             style={styles.destination}
             imageStyle={{ borderRadius: 7 }}
-            resizeMode='cover'
+            resizeMode="cover"
             source={item.illustration}
           />
           <View style={[styles.destinationInfo, styles.shadow]}>
-            <Text style={{ color: Color.black, fontFamily: 'Nunito-Black' }}>
+            <Text style={{ color: Color.black, fontFamily: "Nunito-Black" }}>
               {item.title}
             </Text>
             <View style={styles.carouselTextView}>
-              <Text style={{ color: Color.gray2, fontFamily: 'Nunito-Bold' }}>
-                {item.subtitle.split('').slice(0, 50)}...
+              <Text style={{ color: Color.gray2, fontFamily: "Nunito-Bold" }}>
+                {item.subtitle.split("").slice(0, 50)}...
               </Text>
               <FontAwesome
-                name='chevron-right'
+                name="chevron-right"
                 size={16 * 0.75}
                 color={Color.gray2}
               />
@@ -306,23 +329,121 @@ class Home extends Component {
         {mocks.map((item, index) => {
           const borderWidth = dotPosition.interpolate({
             inputRange: [index - 1, index, index + 1],
-            outputRange: [0, 2.5, 0],
-            extrapolate: 'clamp'
+            outputRange: [0.4, 1, 0.4],
+            extrapolate: "clamp"
           });
           return (
             <Animated.View
               key={`step-${item.id}`}
-              style={[
-                styles.dots,
-                styles.activeDot,
-                { borderWidth: borderWidth }
-              ]}
+              // style={[
+              //   styles.dots,
+              //   //styles.activeDot,
+              //   { opacity: borderWidth }
+              // ]}
+              style={{
+                flex: 0,
+                backgroundColor: Color.secondary,
+                opacity: borderWidth,
+                width: 6,
+                height: 6,
+                borderRadius: 6,
+                marginHorizontal: 5
+              }}
             />
           );
         })}
       </View>
     );
   }
+
+  renderRecentlyAdded = () => {
+    return (
+      <View style={styles.recommendContainer}>
+        <View style={styles.recommendedHeader}>
+          <Text style={styles.recommendText}>Recently Added</Text>
+          <TouchableOpacity activeOpacity={0.5}>
+            <Text style={styles.viewAllText}>View all</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "column" }}>
+          <FlatList
+            style={{ overflow: "visible" }}
+            data={mocks}
+            keyExtractor={item => `${item.id}`}
+            renderItem={({ item, index }) =>
+              this.renderRecentlyAddedItems(item, index)
+            }
+          />
+        </View>
+      </View>
+    );
+  };
+
+  renderRecentlyAddedItems = (item, index) => {
+    return (
+      <View
+        style={[
+          styles.shadow,
+          {
+            flexDirection: "row",
+            backgroundColor: "#fff",
+            padding: 15,
+            //marginHorizontal: 20,
+            marginLeft: 32,
+            marginRight: 32,
+            marginVertical: 6,
+            borderRadius: 12
+          }
+        ]}
+      >
+        <View style={{ flex: 0.3 }}>
+          <Image
+            style={{ width: 85, height: 85, borderRadius: 6 }}
+            source={{ uri: item.preview }}
+          />
+        </View>
+        <View
+          style={{
+            flex: 0.7,
+            flexDirection: "column"
+          }}
+        >
+          <View
+            style={{ justifyContent: "space-between", flexDirection: "row" }}
+          >
+            <Text
+              style={{
+                color: Color.black,
+                fontSize: 16,
+                fontFamily: "Nunito-Bold"
+              }}
+            >
+              {item.title}
+            </Text>
+            <Text
+              style={{
+                color: Color.secondary,
+                fontFamily: "Nunito-Bold",
+                marginRight: 10
+              }}
+            >
+              Rs. {Number(item.price).toFixed(2)}
+            </Text>
+          </View>
+          <Text
+            style={{
+              color: Color.gray2,
+              fontFamily: "Nunito-Regular",
+              fontSize: 12,
+              marginVertical: 5
+            }}
+          >
+            {item.description}
+          </Text>
+        </View>
+      </View>
+    );
+  };
 
   render() {
     return (
@@ -333,6 +454,7 @@ class Home extends Component {
         {this.renderHeader()}
         {this.renderCarousels()}
         {this.renderRecommended()}
+        {this.renderRecentlyAdded()}
       </ScrollView>
     );
   }

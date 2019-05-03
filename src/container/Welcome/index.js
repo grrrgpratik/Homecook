@@ -129,7 +129,10 @@ class Login extends Component {
             Terms of Service
           </Text>
 
-          <ScrollView style={{ marginVertical: 25 }}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{ marginVertical: 25 }}
+          >
             <Text style={styles.termsText}>
               1. Your use of the Service is at your sole risk. The service is
               provided on an "as is" and "as available" basis.
