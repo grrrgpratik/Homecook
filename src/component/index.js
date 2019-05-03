@@ -1,11 +1,5 @@
-import PasswordInputText from "./PasswordInputText";
-import TabBar from "./TabBar";
-import TabBarIcon from "./TabBarIcon";
-import SliderEntry from "./SliderEntry";
+import PasswordInputText from './PasswordInputText';
+import TabBar from './TabBar';
+import TabBarIcon from './TabBarIcon';
 
-export{
-    PasswordInputText,
-    TabBar,
-    TabBarIcon,
-    SliderEntry
-}
+export { PasswordInputText, TabBar, TabBarIcon };

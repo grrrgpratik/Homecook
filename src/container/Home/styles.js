@@ -1,10 +1,10 @@
-import { StyleSheet, Dimensions } from "react-native";
-import { Color } from "common_f";
+import { StyleSheet, Dimensions } from 'react-native';
+import { Color } from 'common_f';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
-  "window"
+  'window'
 );
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 function wp(percentage) {
   const value = (percentage * viewportWidth) / 100;
   return Math.round(value);
@@ -20,7 +20,7 @@ export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 export default StyleSheet.create({
   container: {
     paddingBottom: 24,
-    backgroundColor: "#fefefe"
+    backgroundColor: '#fefefe'
   },
   headerContainer: {
     top: 0,
@@ -29,17 +29,17 @@ export default StyleSheet.create({
   },
   header: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: height * 0.15,
     paddingHorizontal: 14
   },
   settings: {
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     paddingRight: 16,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   options: {
     flex: 1,
@@ -60,12 +60,12 @@ export default StyleSheet.create({
     marginHorizontal: 8
   },
   recommendation: {
-    flexDirection: "column",
+    flexDirection: 'column',
     width: 150,
     marginHorizontal: 8,
     marginBottom: 12,
-    backgroundColor: "green",
-    overflow: "hidden",
+    backgroundColor: 'green',
+    overflow: 'hidden',
     borderRadius: 12,
     //borderTopRightRadius: 12,
     // borderTopLeftRadius: 12,
@@ -77,22 +77,22 @@ export default StyleSheet.create({
     height: 160
   },
   recommendedHeader: {
-    justifyContent: "space-between",
-    alignItems: "flex-end",
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     paddingHorizontal: 36,
     marginVertical: 36 * 0.66,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   recommendationHeader: {
     flex: 1,
-    overflow: "hidden",
+    overflow: 'hidden',
     //borderRadius: 8,
     borderTopRightRadius: 12,
     borderTopLeftRadius: 12,
-    backgroundColor: "black"
+    backgroundColor: 'black'
   },
   shadow: {
-    shadowColor: Color.black,
+    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: 6
@@ -112,10 +112,10 @@ export default StyleSheet.create({
   rating: {
     fontSize: 14 * 2,
     color: Color.white,
-    fontWeight: "bold"
+    fontWeight: 'bold'
   },
   destinationInfo: {
-    position: "absolute",
+    position: 'absolute',
     borderRadius: 12,
     paddingHorizontal: 36 / 2,
     paddingVertical: 36 / 2,
@@ -125,8 +125,8 @@ export default StyleSheet.create({
     left: 36,
     zIndex: 999,
     elevation: 2,
-    backgroundColor: "#fff",
-    flexDirection: "column"
+    backgroundColor: '#fff',
+    flexDirection: 'column'
   },
   dots: {
     width: 8,
@@ -135,81 +135,81 @@ export default StyleSheet.create({
     borderRadius: 8,
     marginHorizontal: 6,
     backgroundColor: Color.gray,
-    borderColor: "transparent"
+    borderColor: 'transparent'
   },
   activeDot: {
     width: 10,
     height: 10,
     borderRadius: 12,
-    borderColor: "#007BFA"
+    borderColor: '#007BFA'
   },
   locationText: {
     fontSize: 14,
     color: Color.gray,
     marginBottom: 5,
-    fontFamily: "Nunito-SemiBold"
+    fontFamily: 'Nunito-SemiBold'
   },
   actualLocation: {
     fontSize: 18,
     color: Color.black,
-    fontFamily: "Nunito-Bold"
+    fontFamily: 'Nunito-Bold'
   },
   iconMap: { height: 25, width: 25, marginRight: 28 },
-  recommendContainer: { flex: 1, flexDirection: "column" },
+  recommendContainer: { flex: 1, flexDirection: 'column' },
   recommendText: {
     fontSize: 14 * 1.4,
     color: Color.black,
-    fontFamily: "Nunito-Black"
+    fontFamily: 'Nunito-Black'
   },
-  viewAllText: { color: Color.gray2, fontFamily: "Nunito-Regular" },
-  bottomContainer:  {
+  viewAllText: { color: Color.gray2, fontFamily: 'Nunito-Regular' },
+  bottomContainer: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    overflow: "hidden",
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    overflow: 'hidden',
     padding: 14,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12
   },
-  recommendationTitle:{
+  recommendationTitle: {
     fontSize: 16,
     paddingBottom: 4,
     color: Color.black,
-    fontFamily: "Nunito-Bold"
+    fontFamily: 'Nunito-Bold'
   },
-  recommendlocation:{
+  recommendlocation: {
     color: Color.gray2,
-    fontFamily: "Nunito-Regular",
+    fontFamily: 'Nunito-Regular',
     fontSize: 12
   },
-  recommendRating:{
-    flexDirection: "row",
+  recommendRating: {
+    flexDirection: 'row',
     marginTop: 16
   },
   recommendPrice: {
     color: Color.primary,
-    fontFamily: "Nunito-Bold",
+    fontFamily: 'Nunito-Bold',
     fontSize: 12,
     marginLeft: 10
   },
   carouselContainer: {
     flex: 1,
-    justifyContent: "space-between",
-    flexDirection: "column"
+    justifyContent: 'space-between',
+    flexDirection: 'column'
   },
-  carouselTextView:{
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
+  carouselTextView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     paddingTop: 8
   },
-  dotsContainer:{
-    justifyContent: "center",
-    alignItems: "center",
+  dotsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 25,
     marginBottom: 2,
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1
   }
 });
