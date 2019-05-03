@@ -9,7 +9,17 @@ const Images = {
   IconHeart: require("images_f/icons/icon-heart.png"),
   IconOrder: require("images_f/icons/icon-cart2.png"),
   IconNews: require("images_f/icons/icon-news.png"),
-  IconSearch: require("images_f/icons/icon-search.png")
+  IconSearch: require("images_f/icons/icon-search.png"),
+  IconMap: require("images_f/icons/maps_icon.png"),
+  Profile: require("images_f/profile.jpg"),
+
+
+  AlooDum: require("images_f/aloo-dum.png"),
+  BiryaniChicken: require("images_f/Biryani-chicken.png"),
+  BuffSamayaBaji: require("images_f/Buff-Samaya-Baji.png"),
+  ChickenCurryRice: require("images_f/chicken-curry-rice.png"),
+  ChickenMomo: require("images_f/chicken-momo.png"),
+  Sandwich: require("images_f/veg-sandwich.png"),
 };
 
 export default Images;

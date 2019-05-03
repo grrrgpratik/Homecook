@@ -3,7 +3,9 @@ import _MyNetInfo from "./MyNetInfo";
 import _Login from "./Login";
 import _Welcome from "./Welcome";
 import _Signup from "./Signup";
+import _Home from "./Home";
 
+export const Home = _Home;
 export const Signup = _Signup;
 export const Welcome = _Welcome;
 export const Login = _Login;

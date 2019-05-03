@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { View, Text, StyleSheet } from "react-native";
 import { Welcome } from "container_f";
 
 class WelcomeScreen extends PureComponent {

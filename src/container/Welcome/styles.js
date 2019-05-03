@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { Color } from "common_f";
+
 export default StyleSheet.create({
   container: {
     flex: 1,

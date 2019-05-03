@@ -10,7 +10,6 @@ import {
   Modal,
   ScrollView
 } from "react-native";
-import { TextInput } from "react-native-paper";
 import styles from "./styles";
 import { Color, Images } from "common_f";
 import LinearGradient from "react-native-linear-gradient";
