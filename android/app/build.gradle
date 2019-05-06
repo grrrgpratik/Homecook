@@ -138,6 +138,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-geocoder')
+    implementation project(':react-native-maps')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-vector-icons')
     implementation project(':@react-native-community_netinfo')

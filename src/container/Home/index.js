@@ -9,12 +9,15 @@ import {
   ScrollView,
   Animated,
   TouchableOpacity,
-  ImageBackground
+  Platform
 } from "react-native";
 import { Color, Images } from "common_f";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Octicons from "react-native-vector-icons/Octicons";
 import styles from "./styles";
+import { CustomHeader } from "component_f";
+import Geocoder from "react-native-geocoder";
+import { connect } from "react-redux";
+import { toast } from "app_f/Omni";
 
 const { width } = Dimensions.get("window");
 const ENTRIES1 = [
@@ -142,35 +145,31 @@ class Home extends Component {
     };
   }
 
-  renderHeader() {
-    return (
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <View style={styles.headerView}>
-            <View style={styles.options}>
-              <Text style={styles.locationText}>Your Location</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={styles.actualLocation}>Ranipauwa</Text>
-                <FontAwesome
-                  name="chevron-down"
-                  size={16 * 0.75}
-                  color={Color.black}
-                  style={{ marginLeft: 6, marginTop: 4 }}
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.settings}>
-            <Image source={Images.IconMap} style={styles.iconMap} />
-            <Image source={Images.Profile} style={styles.avatar} />
-          </View>
-        </View>
-      </View>
+  componentDidMount() {
+    console.log("inside component");
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const geo = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        Geocoder.geocodePosition(geo)
+          .then(res => {
+            console.log(res);
+            this.props.updateCurrentLocation(
+              geo.lng,
+              geo.lat,
+              res[0].formattedAddress
+            );
+          })
+          .catch(err => toast(err));
+      },
+      error => toast(JSON.stringify(error)),
+      {
+        enableHighAccuracy: Platform.OS != "android",
+        timeout: 2000,
+        maximumAge: 2000
+      }
     );
   }
 
@@ -307,7 +306,9 @@ class Home extends Component {
               {item.title}
             </Text>
             <View style={styles.carouselTextView}>
-              <Text style={{ color: Color.gray2, fontFamily: "Nunito-Bold" }}>
+              <Text
+                style={{ color: Color.gray2, fontFamily: "Nunito-Regular" }}
+              >
                 {item.subtitle.split("").slice(0, 50)}...
               </Text>
               <FontAwesome
@@ -451,7 +452,8 @@ class Home extends Component {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}
       >
-        {this.renderHeader()}
+        {/* {this.renderHeader()} */}
+        <CustomHeader onMapScreenPress={this.props.onMapScreenPress} />
         {this.renderCarousels()}
         {this.renderRecommended()}
         {this.renderRecentlyAdded()}
@@ -460,4 +462,16 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+  const { actions } = require("redux_f/LocationRedux");
+
+  return {
+    updateCurrentLocation: (long, lat, actualLocation) =>
+      dispatch(actions.updateCurrentLocation(long, lat, actualLocation))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);

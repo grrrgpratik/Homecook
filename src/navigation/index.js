@@ -13,6 +13,7 @@ import SignupScreen from "./SignupScreen";
 import CartScreen from "./CartScreen";
 import SearchScreen from "./SearchScreen";
 import OrderScreen from "./OrderScreen";
+import MapScreen from "./MapScreen";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -28,10 +29,17 @@ const LoginStack = createStackNavigator(
   }
 );
 
+const HomeScreenStack = createStackNavigator(
+  {
+    HomeStk: HomeScreen,
+    Map: MapScreen
+  }
+);
+
 const AppNavigator = createBottomTabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreenStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <TabBarIcon icon={Images.IconHome} tintColor={tintColor} />

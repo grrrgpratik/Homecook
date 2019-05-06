@@ -22,34 +22,6 @@ export default StyleSheet.create({
     paddingBottom: 24,
     backgroundColor: "#fefefe"
   },
-  headerContainer: {
-    top: 0,
-    height: height * 0.15,
-    width: width
-  },
-  header: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    height: height * 0.15,
-    paddingHorizontal: 14
-  },
-  settings: {
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    paddingRight: 16,
-    flexDirection: "row"
-  },
-  options: {
-    flex: 1,
-    paddingHorizontal: 14
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  },
   paginationContainer: {
     paddingVertical: 8
   },
@@ -142,18 +114,6 @@ export default StyleSheet.create({
     borderWidth: 4,
     backgroundColor: Color.secondary
   },
-  locationText: {
-    fontSize: 14,
-    color: Color.gray,
-    marginBottom: 5,
-    fontFamily: "Nunito-SemiBold"
-  },
-  actualLocation: {
-    fontSize: 18,
-    color: Color.black,
-    fontFamily: "Nunito-Bold"
-  },
-  iconMap: { height: 25, width: 25, marginRight: 28 },
   recommendContainer: { flex: 1, flexDirection: "column" },
   recommendText: {
     fontSize: 14 * 1.4,
@@ -195,7 +155,8 @@ export default StyleSheet.create({
   carouselContainer: {
     flex: 1,
     justifyContent: "space-between",
-    flexDirection: "column"
+    flexDirection: "column",
+    paddingTop: 5
   },
   carouselTextView: {
     flexDirection: "row",
@@ -210,10 +171,5 @@ export default StyleSheet.create({
     marginBottom: 2,
     flexDirection: "row",
     flex: 1
-  },
-  headerView: {
-    flex: 2,
-    flexDirection: "row",
-    paddingBottom: 5
   }
 });

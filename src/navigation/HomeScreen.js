@@ -3,8 +3,12 @@ import { View, Text, StyleSheet } from "react-native";
 import { Home } from "container_f";
 
 class HomeScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
-    return <Home />;
+    const { navigate } = this.props.navigation;
+    return <Home onMapScreenPress={() => navigate("Map")} />;
   }
 }
 export default HomeScreen;
