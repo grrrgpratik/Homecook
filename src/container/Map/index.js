@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
+import { View, StyleSheet, Dimensions, Platform } from "react-native";
 import MapView from "react-native-maps";
 import { Color } from "common_f";
 import { CustomButton, CustomHeader } from "component_f";
-
+import { toast } from "app_f/Omni";
 import Geocoder from "react-native-geocoder";
 import { connect } from "react-redux";
 
@@ -21,24 +21,80 @@ class Map extends Component {
     this.state = {
       latitude: null,
       longitude: null,
-      actualLocation: "Searching..."
+      actualLocation: "Searching...",
+      locationChosen: false,
+      latitudeDelta: 0.0922,
+      longitudeDelta: LATITUDE_DELTA * ASPECT_RATIO
     };
   }
 
   getActualLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.map.animateToCoordinate({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          locationChosen: true
+        });
+        const geo = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        Geocoder.geocodePosition(geo)
+          .then(res => {
+            console.log(res);
+            this.props.updateCurrentLocation(
+              geo.lng,
+              geo.lat,
+              res[0].formattedAddress
+            );
+          })
+          .catch(err => toast(err));
+      },
+      error => toast(JSON.stringify(error)),
+      {
+        enableHighAccuracy: false,
+        timeout: 2000,
+        maximumAge: 2000
+      }
+    );
+  };
+
+  pickLocationHandler = event => {
+    const coords = event.nativeEvent.coordinate;
+    this.map.animateToCoordinate({
+      latitude: coords.latitude,
+      longitude: coords.longitude
+    });
+    this.setState({
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      locationChosen: true
+    });
     const geo = {
-      lat: 28.222392 || this.state.latitude,
-      lng: 83.993712 || this.state.longitude
+      lat: coords.latitude,
+      lng: coords.longitude
     };
     Geocoder.geocodePosition(geo)
       .then(res => {
         console.log(res);
-        this.setState({
-          actualLocation: res[0].formattedAddress
-        });
+        this.props.updateCurrentLocation(
+          geo.lng,
+          geo.lat,
+          res[0].formattedAddress
+        );
       })
-      .catch(err => console.log(err));
+      .catch(err => toast(err));
   };
+
+  // this.props.onLocationPick({
+  //   latitude: coords.latitude,
+  //   longitude: coords.longitude
+  // });
 
   setLocation = () => {};
 
@@ -47,7 +103,10 @@ class Map extends Component {
 
     return (
       <View style={styles.container}>
-        <CustomHeader mapScreen={true} />
+        <CustomHeader
+          mapScreen={true}
+          onMyLocationPress={this.getActualLocation}
+        />
         <MapView
           initialRegion={{
             latitude: latitude,
@@ -55,28 +114,52 @@ class Map extends Component {
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA
           }}
+          onPress={this.pickLocationHandler}
+          region={
+            !this.state.locationChosen
+              ? {
+                  latitude: Number(this.state.latitude),
+                  longitude: Number(this.state.longitude),
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA
+                }
+              : null
+          }
           showsMyLocationButton
           style={styles.map}
           zoomEnabled={true}
           minZoomLevel={10}
+          ref={ref => (this.map = ref)}
         >
-          <Marker
-            coordinate={{
-              latitude: latitude,
-              longitude: longitude
-            }}
-          >
-            <View style={styles.myMarker}>
-              <View style={styles.myMarkerDot} />
-            </View>
-          </Marker>
+          {this.state.locationChosen ? (
+            <Marker
+              coordinate={{
+                latitude: Number(this.state.latitude),
+                longitude: Number(this.state.longitude)
+              }}
+            >
+              <View style={styles.myMarker}>
+                <View style={styles.myMarkerDot} />
+              </View>
+            </Marker>
+          ) : (
+            <Marker
+              coordinate={{
+                latitude: latitude,
+                longitude: longitude
+              }}
+            >
+              <View style={styles.myMarker}>
+                <View style={styles.myMarkerDot} />
+              </View>
+            </Marker>
+          )}
         </MapView>
         <View style={styles.buttonContainer}>
           <CustomButton
             buttonText={"SET LOCATION"}
-            onButtonPress={() => this.setLocation()}
+            onButtonPress={() => this.props.onSetUpLocation()}
           />
-          {console.log("actual location", this.state.actualLocation)}
         </View>
       </View>
     );
@@ -89,9 +172,18 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  const { actions } = require("redux_f/LocationRedux");
+
+  return {
+    updateCurrentLocation: (long, lat, actualLocation) =>
+      dispatch(actions.updateCurrentLocation(long, lat, actualLocation))
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Map);
 
 const styles = StyleSheet.create({

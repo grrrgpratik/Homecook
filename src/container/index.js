@@ -5,7 +5,9 @@ import _Welcome from "./Welcome";
 import _Signup from "./Signup";
 import _Home from "./Home";
 import _Map from "./Map";
+import _ProductDetail from "./ProductDetail";
 
+export const ProductDetail = _ProductDetail;
 export const Map = _Map;
 export const Home = _Home;
 export const Signup = _Signup;

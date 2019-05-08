@@ -13,6 +13,7 @@ YellowBox.ignoreWarnings([
 ]);
 YellowBox.ignoreWarnings([
   "Warning: componentWillUpdate is deprecated",
-  "Module RCTImageLoader"
+  "Module RCTImageLoader",
+  "animateToCoordinate() is deprecated"
 ]);
 AppRegistry.registerComponent(appName, () => ReduxWrapper);

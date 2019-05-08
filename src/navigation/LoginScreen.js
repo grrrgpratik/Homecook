@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Login } from "container_f";
 
-class LoginScreen extends Component {
+class LoginScreen extends PureComponent {
   static navigationOptions = {
     // headerStyle:{
     //   height: 48,

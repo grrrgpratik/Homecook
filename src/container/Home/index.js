@@ -18,6 +18,7 @@ import { CustomHeader } from "component_f";
 import Geocoder from "react-native-geocoder";
 import { connect } from "react-redux";
 import { toast } from "app_f/Omni";
+import { Snackbar } from "react-native-paper";
 
 const { width } = Dimensions.get("window");
 const ENTRIES1 = [
@@ -141,7 +142,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      slider1ActiveSlide: 1
+      slider1ActiveSlide: 1,
+      visible: false
     };
   }
 
@@ -164,9 +166,12 @@ class Home extends Component {
           })
           .catch(err => toast(err));
       },
-      error => toast(JSON.stringify(error)),
+      error => {
+        console.log(JSON.stringify(error));
+        this.setState({ visible: true });
+      },
       {
-        enableHighAccuracy: Platform.OS != "android",
+        enableHighAccuracy: false,
         timeout: 2000,
         maximumAge: 2000
       }
@@ -207,45 +212,50 @@ class Home extends Component {
   renderRecommendation = (item, index) => {
     const isLastItem = index === mocks.length - 1;
     return (
-      <View
-        style={[
-          styles.recommendation,
-          styles.shadow,
-          index === 0 ? { marginLeft: 32 } : null,
-          isLastItem ? { marginRight: 24 } : null
-        ]}
+      <TouchableWithoutFeedback
+        activeOpacity={0.5}
+        onPress={this.props.onProductDetailScreen}
       >
-        <View style={[styles.recommendationHeader, styles.shadow]}>
-          <Image
-            style={styles.recommendationImage}
-            source={{ uri: item.preview }}
-          />
-        </View>
-        <View style={[styles.bottomContainer, styles.shadow]}>
-          <Text style={styles.recommendationTitle}>{item.title} </Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.recommendlocation}>
-              Rs. {Number(item.price)}
-            </Text>
-            <View
-              style={{
-                marginVertical: 6,
-                marginLeft: 4,
-                marginRight: 2,
-                width: 4,
-                height: 4,
-                borderRadius: 6,
-                backgroundColor: Color.black
-              }}
+        <View
+          style={[
+            styles.recommendation,
+            styles.shadow,
+            index === 0 ? { marginLeft: 32 } : null,
+            isLastItem ? { marginRight: 24 } : null
+          ]}
+        >
+          <View style={[styles.recommendationHeader, styles.shadow]}>
+            <Image
+              style={styles.recommendationImage}
+              source={{ uri: item.preview }}
             />
-            <Text style={styles.recommendlocation}> {item.location}</Text>
           </View>
-          <View style={styles.recommendRating}>
-            {this.renderRatings(item.rating)}
-            <Text style={styles.recommendPrice}>880 ratings</Text>
+          <View style={[styles.bottomContainer, styles.shadow]}>
+            <Text style={styles.recommendationTitle}>{item.title} </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={styles.recommendlocation}>
+                Rs. {Number(item.price)}
+              </Text>
+              <View
+                style={{
+                  marginVertical: 6,
+                  marginLeft: 4,
+                  marginRight: 2,
+                  width: 4,
+                  height: 4,
+                  borderRadius: 6,
+                  backgroundColor: Color.black
+                }}
+              />
+              <Text style={styles.recommendlocation}> {item.location}</Text>
+            </View>
+            <View style={styles.recommendRating}>
+              {this.renderRatings(item.rating)}
+              <Text style={styles.recommendPrice}>880 ratings</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   };
 
@@ -457,6 +467,18 @@ class Home extends Component {
         {this.renderCarousels()}
         {this.renderRecommended()}
         {this.renderRecentlyAdded()}
+        <Snackbar
+          visible={this.state.visible}
+          onDismiss={() => this.setState({ visible: false })}
+          action={{
+            label: "Retry",
+            onPress: () => {
+              // Do something
+            }
+          }}
+        >
+          Couldn't get your current location
+        </Snackbar>
       </ScrollView>
     );
   }

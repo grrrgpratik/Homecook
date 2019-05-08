@@ -5,6 +5,7 @@ import {
   createAppContainer,
   createSwitchNavigator
 } from "react-navigation";
+import { Easing, Animated } from "react-native";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
 import AuthLoadingScreen from "./AuthLoadingScreen";
@@ -14,6 +15,7 @@ import CartScreen from "./CartScreen";
 import SearchScreen from "./SearchScreen";
 import OrderScreen from "./OrderScreen";
 import MapScreen from "./MapScreen";
+import ProductDetailScreen from "./ProductDetailScreen";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -29,12 +31,11 @@ const LoginStack = createStackNavigator(
   }
 );
 
-const HomeScreenStack = createStackNavigator(
-  {
-    HomeStk: HomeScreen,
-    Map: MapScreen
-  }
-);
+const HomeScreenStack = createStackNavigator({
+  HomeStk: HomeScreen,
+  Map: MapScreen,
+  Product: ProductDetailScreen
+});
 
 const AppNavigator = createBottomTabNavigator(
   {

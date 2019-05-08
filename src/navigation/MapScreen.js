@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Map } from "container_f";
 
-class MapScreen extends Component {
+class MapScreen extends PureComponent {
   static navigationOptions = {
     header: null
   };
 
   render() {
-    return <Map />;
+    const { goBack } = this.props.navigation;
+    return <Map onSetUpLocation={() => goBack()} />;
   }
 }
 export default MapScreen;

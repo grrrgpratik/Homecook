@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   View,
   Text,
@@ -9,12 +9,12 @@ import {
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Color, Images } from "common_f";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 
 const { width, height } = Dimensions.get("window");
 
-class CustomeHeader extends Component {
+class CustomeHeader extends PureComponent {
   render() {
     console.log("state location", this.props.location);
     const location = this.props.location.actualLocation;
@@ -31,9 +31,15 @@ class CustomeHeader extends Component {
                   alignItems: "center"
                 }}
               >
-                <Text style={styles.actualLocation}>
-                  {location.split(",", 1)}
-                </Text>
+                {this.props.mapScreen === true ? (
+                  <Text style={styles.actualLocation}>
+                    {location.split(",", 2)}
+                  </Text>
+                ) : (
+                  <Text style={styles.actualLocation}>
+                    {location.split(",", 1)}
+                  </Text>
+                )}
                 <FontAwesome
                   name="chevron-down"
                   size={16 * 0.75}
@@ -46,7 +52,13 @@ class CustomeHeader extends Component {
 
           {this.props.mapScreen === true ? (
             <View style={styles.settings}>
-              <Ionicons name="ios-menu" size={26} color={Color.black} />
+              <TouchableOpacity onPress={this.props.onMyLocationPress}>
+                <MaterialIcons
+                  name="my-location"
+                  size={26}
+                  color={Color.black}
+                />
+              </TouchableOpacity>
             </View>
           ) : (
             <View style={styles.settings}>

@@ -1,14 +1,19 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Home } from "container_f";
 
-class HomeScreen extends Component {
+class HomeScreen extends PureComponent {
   static navigationOptions = {
     header: null
   };
   render() {
     const { navigate } = this.props.navigation;
-    return <Home onMapScreenPress={() => navigate("Map")} />;
+    return (
+      <Home
+        onMapScreenPress={() => navigate("Map")}
+        onProductDetailScreen={() => navigate("Product")}
+      />
+    );
   }
 }
 export default HomeScreen;
