@@ -5,7 +5,6 @@ import {
   createAppContainer,
   createSwitchNavigator
 } from "react-navigation";
-import { Easing, Animated } from "react-native";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
 import AuthLoadingScreen from "./AuthLoadingScreen";
@@ -16,6 +15,9 @@ import SearchScreen from "./SearchScreen";
 import OrderScreen from "./OrderScreen";
 import MapScreen from "./MapScreen";
 import ProductDetailScreen from "./ProductDetailScreen";
+import UserProfileScreen from "./UserProfileScreen";
+import EditProfileScreen from "./EditProfileScreen";
+import SaveProfileScreen from "./SaveProfileScreen";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -31,11 +33,30 @@ const LoginStack = createStackNavigator(
   }
 );
 
-const HomeScreenStack = createStackNavigator({
-  HomeStk: HomeScreen,
-  Map: MapScreen,
-  Product: ProductDetailScreen
-});
+const HomeScreenStack = createStackNavigator(
+  {
+    HomeStk: HomeScreen,
+    Map: MapScreen,
+    Product: ProductDetailScreen,
+    UserProfile: UserProfileScreen,
+    EditProfile: EditProfileScreen,
+    SaveProfile: SaveProfileScreen
+  },
+  {
+    mode: "modal"
+  }
+);
+
+HomeScreenStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible
+  };
+};
 
 const AppNavigator = createBottomTabNavigator(
   {

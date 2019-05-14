@@ -65,7 +65,9 @@ class CustomeHeader extends PureComponent {
               <TouchableOpacity onPress={this.props.onMapScreenPress}>
                 <Image source={Images.IconMap} style={styles.iconMap} />
               </TouchableOpacity>
-              <Image source={Images.Profile} style={styles.avatar} />
+              <TouchableOpacity onPress={this.props.onEditProfileScreen}>
+                <Image source={Images.Profile} style={styles.avatar} />
+              </TouchableOpacity>
             </View>
           )}
         </View>

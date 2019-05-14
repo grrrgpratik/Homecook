@@ -8,12 +8,10 @@ import { name as appName } from "./app.json";
 import ReduxWrapper from "./src/ReduxWrapper";
 
 YellowBox.ignoreWarnings([
-  "Warning: componentWillReceiveProps is deprecated",
-  "Module RCTImageLoader"
-]);
-YellowBox.ignoreWarnings([
   "Warning: componentWillUpdate is deprecated",
   "Module RCTImageLoader",
-  "animateToCoordinate() is deprecated"
+  "animateToCoordinate() is deprecated",
+  "Warning: componentWillMount is deprecated",
+  "Warning: componentWillReceiveProps is deprecated"
 ]);
 AppRegistry.registerComponent(appName, () => ReduxWrapper);

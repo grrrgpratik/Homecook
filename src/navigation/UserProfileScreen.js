@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { ProductDetail } from "container_f";
+import { UserProfile } from "container_f";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 
-class ProductDetailScreen extends PureComponent {
+class UserProfileScreen extends PureComponent {
   static navigationOptions = ({ navigation }) => {
-
     return {
       header: (
         <View style={[styles.row, styles.header]}>
@@ -25,18 +24,15 @@ class ProductDetailScreen extends PureComponent {
           </TouchableOpacity>
         </View>
       ),
-      headerTransparent: true,
-      //mode: "modal"
+      headerTransparent: true
     };
   };
   render() {
     const { navigate } = this.props.navigation;
-    return (
-      <ProductDetail onProfileScreenPress={() => navigate("UserProfile")} />
-    );
+    return <UserProfile />;
   }
 }
-export default ProductDetailScreen;
+export default UserProfileScreen;
 
 const styles = StyleSheet.create({
   row: {

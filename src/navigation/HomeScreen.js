@@ -12,6 +12,7 @@ class HomeScreen extends PureComponent {
       <Home
         onMapScreenPress={() => navigate("Map")}
         onProductDetailScreen={() => navigate("Product")}
+        onEditProfileScreen={()=>navigate("EditProfile")}
       />
     );
   }

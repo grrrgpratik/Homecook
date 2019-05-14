@@ -6,7 +6,13 @@ import _Signup from "./Signup";
 import _Home from "./Home";
 import _Map from "./Map";
 import _ProductDetail from "./ProductDetail";
+import _UserProfile from "./UserProfile";
+import _EditProfile from "./EditProfile";
+import _SaveProfile from "./SaveProfile";
 
+export const SaveProfile = _SaveProfile;
+export const EditProfile = _EditProfile;
+export const UserProfile = _UserProfile;
 export const ProductDetail = _ProductDetail;
 export const Map = _Map;
 export const Home = _Home;

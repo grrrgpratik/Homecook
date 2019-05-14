@@ -463,7 +463,7 @@ class Home extends Component {
         contentContainerStyle={styles.container}
       >
         {/* {this.renderHeader()} */}
-        <CustomHeader onMapScreenPress={this.props.onMapScreenPress} />
+        <CustomHeader onMapScreenPress={this.props.onMapScreenPress} onEditProfileScreen={this.props.onEditProfileScreen} />
         {this.renderCarousels()}
         {this.renderRecommended()}
         {this.renderRecentlyAdded()}

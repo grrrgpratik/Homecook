@@ -106,12 +106,15 @@ export default StyleSheet.create({
   },
   profileButton: {
     position: "absolute",
-    top: -38,
+    top: -48,
     right: 38,
     width: 36 * 2,
     height: 36 * 2,
     borderRadius: 36,
     zIndex: 100,
     elevation: 2
+  },
+  scene: {
+    flex: 1
   }
 });
