@@ -19,8 +19,8 @@ class Map extends Component {
     super(props);
 
     this.state = {
-      latitude: null,
-      longitude: null,
+      latitude: this.props.location.latitude,
+      longitude: this.props.location.longitude,
       actualLocation: "Searching...",
       locationChosen: false,
       latitudeDelta: 0.0922,

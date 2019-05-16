@@ -5,6 +5,7 @@ import {
   createAppContainer,
   createSwitchNavigator
 } from "react-navigation";
+import { View, Text, StyleSheet } from "react-native";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
 import AuthLoadingScreen from "./AuthLoadingScreen";

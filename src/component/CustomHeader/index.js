@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: height * 0.15,
-    paddingHorizontal: 14
+    paddingHorizontal: 16
   },
   headerView: {
     flex: 2,

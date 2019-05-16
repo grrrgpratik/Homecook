@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Search } from "container_f";
 
 class SearchScreen extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={{ color: "black" }}>SearchScreen</Text>
-      </View>
-    );
+    return <Search />;
   }
 }
 export default SearchScreen;

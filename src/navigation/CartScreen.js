@@ -1,21 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Cart } from "container_f";
+
 
 class CartScreen extends Component {
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={{ color: "black" }}>CartScreen</Text>
-      </View>
-    );
+    return <Cart />;
   }
 }
 export default CartScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+

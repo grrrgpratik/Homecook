@@ -1,11 +1,10 @@
-
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   View,
   Platform,
   StyleSheet,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { Device } from "common_f";
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopWidth: 1,
     borderTopColor: "#eee",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   tab: {
     alignSelf: "stretch",
@@ -27,13 +26,13 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         justifyContent: Device.isIphoneX ? "flex-start" : "center",
-        paddingTop: Device.isIphoneX ? 12 : 0,
+        paddingTop: Device.isIphoneX ? 12 : 0
       },
       android: {
-        justifyContent: "center",
-      },
-    }),
-  },
+        justifyContent: "center"
+      }
+    })
+  }
 });
 
 class TabBar extends PureComponent {
@@ -48,17 +47,20 @@ class TabBar extends PureComponent {
       navigation,
       renderIcon,
       activeTintColor,
-      inactiveTintColor,
+      inactiveTintColor
     } = this.props;
 
     const { routes } = navigation.state;
 
-    const ignoreScreen = [
-      
-    ];
+    const ignoreScreen = [];
 
     return (
-      <View style={[styles.tabbar, {backgroundColor: '#fff', borderTopColor: '#fff'}]}>
+      <View
+        style={[
+          styles.tabbar,
+          { backgroundColor: "#fff", borderTopColor: "#fff", elevation: 4 }
+        ]}
+      >
         {routes &&
           routes.map((route, index) => {
             const focused = index === navigation.state.index;
@@ -76,13 +78,14 @@ class TabBar extends PureComponent {
               <TouchableWithoutFeedback
                 key={route.key}
                 style={styles.tab}
-                onPress={() => this.onPress(index, route)}>
+                onPress={() => this.onPress(index, route)}
+              >
                 <Animatable.View ref={`tabItem${index}`} style={styles.tab}>
                   {renderIcon({
                     route,
                     index,
                     focused,
-                    tintColor,
+                    tintColor
                   })}
                 </Animatable.View>
               </TouchableWithoutFeedback>
@@ -99,7 +102,7 @@ TabBar.propTypes = {
   renderIcon: PropTypes.any,
   activeTintColor: PropTypes.string,
   inactiveTintColor: PropTypes.string,
-  jumpTo: PropTypes.func,
+  jumpTo: PropTypes.func
 };
 //const mapStateToProps = ({ user }) => ({ user: user.user });
 export default TabBar;

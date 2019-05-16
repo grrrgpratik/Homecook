@@ -9,7 +9,11 @@ import _ProductDetail from "./ProductDetail";
 import _UserProfile from "./UserProfile";
 import _EditProfile from "./EditProfile";
 import _SaveProfile from "./SaveProfile";
+import _Search from "./Search";
+import _Cart from "./Cart";
 
+export const Cart = _Cart;
+export const Search = _Search;
 export const SaveProfile = _SaveProfile;
 export const EditProfile = _EditProfile;
 export const UserProfile = _UserProfile;

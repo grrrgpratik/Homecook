@@ -169,12 +169,12 @@ class Home extends Component {
       error => {
         console.log(JSON.stringify(error));
         this.setState({ visible: true });
-      },
-      {
-        enableHighAccuracy: false,
-        timeout: 2000,
-        maximumAge: 2000
       }
+      // {
+      //   enableHighAccuracy: false,
+      //   timeout: 2000,
+      //   maximumAge: 2000
+      // }
     );
   }
 
@@ -463,7 +463,10 @@ class Home extends Component {
         contentContainerStyle={styles.container}
       >
         {/* {this.renderHeader()} */}
-        <CustomHeader onMapScreenPress={this.props.onMapScreenPress} onEditProfileScreen={this.props.onEditProfileScreen} />
+        <CustomHeader
+          onMapScreenPress={this.props.onMapScreenPress}
+          onEditProfileScreen={this.props.onEditProfileScreen}
+        />
         {this.renderCarousels()}
         {this.renderRecommended()}
         {this.renderRecentlyAdded()}

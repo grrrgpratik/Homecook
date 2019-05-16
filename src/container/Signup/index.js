@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -9,11 +9,14 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView
-} from 'react-native';
-import { Images, Color } from 'common_f';
-import LinearGradient from 'react-native-linear-gradient';
+} from "react-native";
+import { Images, Color } from "common_f";
+import LinearGradient from "react-native-linear-gradient";
+import Icon from "react-native-vector-icons/FontAwesome";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 class Signup extends Component {
   render() {
@@ -21,7 +24,7 @@ class Signup extends Component {
       <ScrollView>
         <KeyboardAvoidingView
           style={styles.container}
-          behavior='padding'
+          behavior="padding"
           keyboardVerticalOffset={-30}
           enabled
         >
@@ -30,94 +33,92 @@ class Signup extends Component {
             style={{
               height: 200,
               width: 200,
-              alignSelf: 'center',
+              alignSelf: "center",
               marginTop: height / 2 - 320
             }}
-            resizeMode='contain'
+            resizeMode="contain"
           />
           <View
             style={{
-              justifyContent: 'center',
+              justifyContent: "center",
               paddingLeft: 30,
               paddingRight: 30,
               paddingTop: 15
             }}
           >
-            <TextInput
-              style={{
-                height: 45,
-                color: Color.gray,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: '#D6DDF6',
-                backgroundColor: '#F9FAFF',
-                borderRadius: 5,
-                fontFamily: 'Nunito-Regular',
-                marginTop: 15
-              }}
-              placeholder='Email-address'
-              placeholderTextColor={Color.gray}
-              keyboardType={'email-address'}
-            />
-            <TextInput
-              style={{
-                height: 45,
-                color: Color.gray,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: '#D6DDF6',
-                backgroundColor: '#F9FAFF',
-                borderRadius: 5,
-                fontFamily: 'Nunito-Regular',
-                marginTop: 15
-              }}
-              placeholder='Your Name'
-              placeholderTextColor={Color.gray}
-              keyboardType={'email-address'}
-            />
-            <TextInput
-              style={{
-                height: 45,
-                color: Color.gray,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: '#D6DDF6',
-                backgroundColor: '#F9FAFF',
-                borderRadius: 5,
-                fontFamily: 'Nunito-Regular',
-                marginTop: 15
-              }}
-              placeholder='Phone Number'
-              placeholderTextColor={Color.gray}
-              keyboardType={'email-address'}
-            />
-            <TextInput
-              style={{
-                height: 45,
-                color: Color.gray,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: '#D6DDF6',
-                backgroundColor: '#F9FAFF',
-                borderRadius: 5,
-                fontFamily: 'Nunito-Regular',
-                marginTop: 15
-              }}
-              placeholder='Password'
-              placeholderTextColor={Color.gray}
-              keyboardType={'email-address'}
-            />
-            <TextInput
-              style={{
-                height: 45,
-                color: Color.gray,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: '#D6DDF6',
-                backgroundColor: '#F9FAFF',
-                fontFamily: 'Nunito-Regular',
-                borderRadius: 5,
-                marginTop: 15,
-                marginBottom: 15
-              }}
-              placeholder='Confirm Password'
-              placeholderTextColor={Color.gray}
-            />
+            <View style={styles.searchSection}>
+              <MaterialCommunityIcons
+                style={styles.searchIcon}
+                name="email"
+                size={18}
+                color={Color.gray}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Email-address"
+                placeholderTextColor={Color.gray}
+                keyboardType={"email-address"}
+              />
+            </View>
+
+            <View style={[styles.searchSection, { marginTop: 15 }]}>
+              <FontAwesome5
+                style={styles.searchIcon}
+                name="user-alt"
+                size={15}
+                color={Color.gray}
+              />
+              <TextInput
+                style={[styles.input]}
+                placeholder="Your Name"
+                placeholderTextColor={Color.gray}
+                keyboardType={"email-address"}
+              />
+            </View>
+
+            <View style={[styles.searchSection, { marginTop: 15 }]}>
+              <MaterialCommunityIcons
+                style={styles.searchIcon}
+                name="phone"
+                size={18}
+                color={Color.gray}
+              />
+              <TextInput
+                style={[styles.input]}
+                placeholder="Phone Number"
+                placeholderTextColor={Color.gray}
+                keyboardType={"email-address"}
+              />
+            </View>
+
+            <View style={[styles.searchSection, { marginTop: 15 }]}>
+              <Icon
+                style={styles.searchIcon}
+                name="lock"
+                size={18}
+                color={Color.gray}
+              />
+              <TextInput
+                style={[styles.input]}
+                placeholder="Password"
+                placeholderTextColor={Color.gray}
+                keyboardType={"email-address"}
+              />
+            </View>
+
+            <View style={[styles.searchSection, { marginVertical: 15 }]}>
+              <Icon
+                style={styles.searchIcon}
+                name="lock"
+                size={18}
+                color={Color.gray}
+              />
+              <TextInput
+                style={[styles.input]}
+                placeholder="Confirm Password"
+                placeholderTextColor={Color.gray}
+              />
+            </View>
 
             <TouchableOpacity
               activeOpacity={0.8}
@@ -132,8 +133,8 @@ class Signup extends Component {
                   height: 48,
                   borderRadius: 6,
                   marginTop: 20,
-                  justifyContent: 'center',
-                  shadowColor: '#323643',
+                  justifyContent: "center",
+                  shadowColor: "#323643",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.1,
                   shadowRadius: 10
@@ -141,9 +142,9 @@ class Signup extends Component {
               >
                 <Text
                   style={{
-                    textAlign: 'center',
-                    color: 'white',
-                    fontFamily: 'Nunito-Black'
+                    textAlign: "center",
+                    color: "white",
+                    fontFamily: "Nunito-Black"
                   }}
                 >
                   SIGN UP
@@ -163,5 +164,27 @@ export default Signup;
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  searchSection: {
+    flexDirection: "row",
+    //justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F9FAFF",
+    borderRadius: 5
+  },
+  searchIcon: {
+    padding: 12
+  },
+  input: {
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0,
+    backgroundColor: "#F9FAFF",
+    color: Color.gray,
+    backgroundColor: "#F9FAFF",
+    fontFamily: "Nunito-Regular",
+    borderRadius: 5
   }
 });
