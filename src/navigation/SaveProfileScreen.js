@@ -1,8 +1,14 @@
-import React, { Component } from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
-import { SaveProfile } from "container_f";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Color } from "common_f";
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  Platform
+} from 'react-native';
+import { SaveProfile } from 'container_f';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Color } from 'common_f';
 
 class EditProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -14,8 +20,8 @@ class EditProfileScreen extends Component {
             onPress={() => navigation.goBack()}
           >
             <MaterialCommunityIcons
-              name="chevron-left"
-              color={"black"}
+              name='chevron-left'
+              color={'black'}
               size={30}
             />
           </TouchableOpacity>
@@ -38,33 +44,34 @@ export default EditProfileScreen;
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   header: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 16,
-    flexDirection: "row"
+    flexDirection: 'row',
+    marginTop: Platform.OS === 'ios' ? 14 : 0
   },
   back: {
     width: 36,
     height: 36,
-    justifyContent: "center",
-    alignItems: "flex-start",
-    backgroundColor: "#fff"
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: '#fff'
   },
   title: {
     fontSize: 16,
     color: Color.black,
-    fontFamily: "Nunito-Black",
-    alignSelf: "center",
+    fontFamily: 'Nunito-Black',
+    alignSelf: 'center',
     marginLeft: 82
     //padding: 10
   },
   titleContainer: {
-    justifyContent: "space-around",
-    alignItems: "center",
+    justifyContent: 'space-around',
+    alignItems: 'center',
     flex: 1,
-    flexDirection: "row"
+    flexDirection: 'row'
     //backgroundColor: "red"
   }
 });

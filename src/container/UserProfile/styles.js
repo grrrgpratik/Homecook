@@ -1,17 +1,17 @@
-import { StyleSheet, Dimensions } from "react-native";
-const { width, height } = Dimensions.get("window");
-import { Color } from "common_f";
+import { StyleSheet, Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
+import { Color } from 'common_f';
 export default StyleSheet.create({
   container: {
     flex: 1
   },
   row: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   dotsContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
     bottom: 48,
     right: 0,
     left: 0
@@ -25,7 +25,7 @@ export default StyleSheet.create({
   },
   contentHeader: {
     padding: 32,
-    backgroundColor: "#fcfcfc",
+    backgroundColor: '#fcfcfc',
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     marginTop: -18
@@ -47,10 +47,11 @@ export default StyleSheet.create({
     shadowColor: Color.black,
     shadowOffset: {
       width: 0,
-      height: 6
+      height: 5
     },
-    shadowOpacity: 0.5,
-    shadowRadius: 5
+    shadowOpacity: 0.24,
+    shadowRadius: 5,
+    elevation: 2
   },
   title: {
     fontSize: 24,
@@ -61,20 +62,20 @@ export default StyleSheet.create({
     color: Color.black
   },
   nunitoBlack: {
-    fontFamily: "Nunito-Black"
+    fontFamily: 'Nunito-Black'
   },
   nunitoRegular: {
-    fontFamily: "Nunito-Regular"
+    fontFamily: 'Nunito-Regular'
   },
   rating: {
     marginTop: 12,
-    justifyContent: "space-between"
+    justifyContent: 'space-between'
   },
   reviewText: { marginLeft: 8, color: Color.black, fontSize: 14 },
   priceText: { color: Color.secondary, fontSize: 20 },
   textContainer: {
     marginTop: 6,
-    justifyContent: "space-between"
+    justifyContent: 'space-between'
   },
   regularGray: { color: Color.black, fontSize: 14 },
   smallGray: { color: Color.black, fontSize: 12 },
@@ -86,26 +87,26 @@ export default StyleSheet.create({
   },
   reviewContainer: {
     borderRadius: 7,
-    elevation: 1,
-    backgroundColor: "#fff",
+    elevation: 2,
+    backgroundColor: '#fff',
     marginVertical: 5
   },
   reviewImageContainer: {
     flex: 1,
     padding: 22,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   reviewDate: { color: Color.gray, fontSize: 12, paddingTop: 28 },
   buttonContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: -15,
     left: 0,
     right: 0,
     padding: 32
   },
   profileButton: {
-    position: "absolute",
+    position: 'absolute',
     top: -48,
     right: 38,
     width: 36 * 2,

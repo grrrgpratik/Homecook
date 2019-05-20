@@ -1,22 +1,23 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image,
-  Dimensions
-} from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { Color, Images } from "common_f";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { connect } from "react-redux";
+  Dimensions,
+  Platform
+} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Color, Images } from 'common_f';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 class CustomeHeader extends PureComponent {
   render() {
-    console.log("state location", this.props.location);
+    console.log('state location', this.props.location);
     const location = this.props.location.actualLocation;
 
     return (
@@ -27,21 +28,21 @@ class CustomeHeader extends PureComponent {
               <Text style={styles.locationText}>Your Location</Text>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center"
+                  flexDirection: 'row',
+                  alignItems: 'center'
                 }}
               >
                 {this.props.mapScreen === true ? (
                   <Text style={styles.actualLocation}>
-                    {location.split(",", 2)}
+                    {location.split(',', 2)}
                   </Text>
                 ) : (
                   <Text style={styles.actualLocation}>
-                    {location.split(",", 1)}
+                    {location.split(',', 1)}
                   </Text>
                 )}
                 <FontAwesome
-                  name="chevron-down"
+                  name='chevron-down'
                   size={16 * 0.75}
                   color={Color.black}
                   style={{ marginLeft: 6, marginTop: 4 }}
@@ -54,7 +55,7 @@ class CustomeHeader extends PureComponent {
             <View style={styles.settings}>
               <TouchableOpacity onPress={this.props.onMyLocationPress}>
                 <MaterialIcons
-                  name="my-location"
+                  name='my-location'
                   size={26}
                   color={Color.black}
                 />
@@ -96,16 +97,17 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    height: height * 0.15,
-    paddingHorizontal: 16
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: height * 0.16,
+    paddingHorizontal: 16,
+    backgroundColor: '#fff',
+    marginTop: Platform.OS === 'ios' ? 14 : 0
   },
   headerView: {
     flex: 2,
-    flexDirection: "row"
-    //paddingBottom: 5
+    flexDirection: 'row'
   },
   options: {
     flex: 1,
@@ -120,18 +122,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Color.gray,
     marginBottom: 5,
-    fontFamily: "Nunito-SemiBold"
+    fontFamily: 'Nunito-SemiBold'
   },
   actualLocation: {
     fontSize: 16,
     color: Color.black,
-    fontFamily: "Nunito-Bold"
+    fontFamily: 'Nunito-Bold'
   },
   settings: {
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     paddingRight: 16,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   iconMap: { height: 25, width: 25, marginRight: 28 }
 });

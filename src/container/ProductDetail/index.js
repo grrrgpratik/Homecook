@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import {
   View,
   Text,
@@ -9,45 +9,45 @@ import {
   Platform,
   TouchableOpacity,
   TouchableHighlight
-} from "react-native";
-import { Color } from "common_f";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { CustomButton } from "component_f";
-import styles from "./styles";
+} from 'react-native';
+import { Color } from 'common_f';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { CustomButton } from 'component_f';
+import styles from './styles';
 
 const article = [
   {
     id: 1,
     user: {
-      name: "Lelia Chavez",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      name: 'Lelia Chavez',
+      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
     },
     saved: true,
-    location: "0.4 Km from you",
+    location: '0.4 Km from you',
     temperature: 34,
-    title: "Santorini",
+    title: 'Santorini',
     description:
-      "A chunky salad of cucumbers, cherry tomatoes, peppery mint leaves drizzeled with a black olives sauce.",
+      'A chunky salad of cucumbers, cherry tomatoes, peppery mint leaves drizzeled with a black olives sauce.',
     rating: 4.3,
     price: 224.0,
     reviews: 3212,
     preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
     images: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
     ],
     review: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
     ]
   }
 ];
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 class ProductDetail extends PureComponent {
   scrollX = new Animated.Value(0);
@@ -60,9 +60,9 @@ class ProductDetail extends PureComponent {
           pagingEnabled
           scrollEnabled
           showsHorizontalScrollIndicator={false}
-          decelerationRate="normal"
+          decelerationRate='normal'
           scrollEventThrottle={16}
-          snapToAlignment="center"
+          snapToAlignment='center'
           onScroll={Animated.event([
             { nativeEvent: { contentOffset: { x: this.scrollX } } }
           ])}
@@ -71,7 +71,7 @@ class ProductDetail extends PureComponent {
             <Image
               key={`${index}-${img}`}
               source={{ uri: img }}
-              resizeMode="cover"
+              resizeMode='cover'
               style={{ width, height: width }}
             />
           ))}
@@ -90,7 +90,7 @@ class ProductDetail extends PureComponent {
           const opacity = dotPosition.interpolate({
             inputRange: [index - 1, index, index + 1],
             outputRange: [0.5, 1, 0.5],
-            extrapolate: "clamp"
+            extrapolate: 'clamp'
           });
           return (
             <Animated.View
@@ -109,11 +109,11 @@ class ProductDetail extends PureComponent {
       const activeStar = Math.floor(rating) >= index + 1;
       return (
         <FontAwesome
-          name="star"
+          name='star'
           key={`star-${index}`}
           size={14}
-          color={Color[activeStar ? "tertiary" : "gray"]}
-          style={{ justifyContent: "space-evenly", marginRight: 3 }}
+          color={Color[activeStar ? 'tertiary' : 'gray']}
+          style={{ justifyContent: 'space-evenly', marginRight: 3 }}
         />
       );
     });
@@ -137,7 +137,7 @@ class ProductDetail extends PureComponent {
             <Image
               style={styles.avatar}
               source={{
-                uri: "https://randomuser.me/api/portraits/women/44.jpg"
+                uri: 'https://randomuser.me/api/portraits/women/44.jpg'
               }}
             />
           </TouchableHighlight>
@@ -147,7 +147,7 @@ class ProductDetail extends PureComponent {
           </Text>
 
           <View style={[styles.row, styles.rating]}>
-            <View style={[styles.row, { alignItems: "center" }]}>
+            <View style={[styles.row, { alignItems: 'center' }]}>
               {this.renderRatings(article[0].rating)}
               <Text style={[styles.nunitoRegular, styles.reviewText]}>
                 ({article[0].reviews} reviews)
@@ -168,10 +168,10 @@ class ProductDetail extends PureComponent {
           <View style={[styles.row, styles.textContainer]}>
             <View style={styles.row}>
               <EvilIcons
-                name="location"
+                name='location'
                 size={18}
                 color={Color.black}
-                style={{ alignSelf: "center", marginRight: 3 }}
+                style={{ alignSelf: 'center', marginRight: 3 }}
               />
               <Text style={[styles.nunitoRegular, styles.regularGray]}>
                 3.5 km away
@@ -179,10 +179,10 @@ class ProductDetail extends PureComponent {
             </View>
             <View style={styles.row}>
               <Ionicons
-                name="ios-timer"
+                name='ios-timer'
                 size={16}
                 color={Color.black}
-                style={{ alignSelf: "center", marginRight: 4 }}
+                style={{ alignSelf: 'center', marginRight: 4 }}
               />
               <Text style={[styles.nunitoRegular, styles.smallGray]}>
                 22 minutes to wait
@@ -198,7 +198,7 @@ class ProductDetail extends PureComponent {
                   { color: Color.black, marginTop: 6 }
                 ]}
               >
-                Chef:{" "}
+                Chef:{' '}
               </Text>
               <Text
                 style={[
@@ -213,19 +213,22 @@ class ProductDetail extends PureComponent {
 
           <Text style={[styles.nunitoBlack, styles.titleText]}>Details</Text>
           <Text style={[styles.description, styles.nunitoRegular]}>
-            {article[0].description.split("").slice(0, 180)}
+            {article[0].description.split('').slice(0, 180)}
           </Text>
 
           <Text style={[styles.titleText, styles.nunitoBlack]}> Reviews</Text>
 
           {article[0].review.map((item, index) => {
             return (
-              <View key={index} style={[styles.row, styles.reviewContainer]}>
+              <View
+                key={index}
+                style={[styles.row, styles.reviewContainer, styles.shadow]}
+              >
                 <View style={styles.reviewImageContainer}>
                   <Image
                     style={styles.reviewAvatar}
                     source={{
-                      uri: "https://randomuser.me/api/portraits/women/44.jpg"
+                      uri: 'https://randomuser.me/api/portraits/women/44.jpg'
                     }}
                   />
                   <Text
@@ -239,7 +242,9 @@ class ProductDetail extends PureComponent {
                   </Text>
                 </View>
 
-                <View style={{ flex: 5, padding: 22 }}>
+                <View
+                  style={{ flex: 5, paddingVertical: 22, paddingHorizontal: 6 }}
+                >
                   <Text style={[styles.nunitoRegular, styles.regularGray]}>
                     We had such delicious food and dishes. Fantastic thalis,
                     superb
@@ -254,7 +259,7 @@ class ProductDetail extends PureComponent {
         </View>
 
         <View style={styles.buttonContainer}>
-          <CustomButton buttonText={"ADD TO CART"} />
+          <CustomButton buttonText={'ADD TO CART'} />
         </View>
       </ScrollView>
     );
