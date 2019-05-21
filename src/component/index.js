@@ -4,7 +4,8 @@ import TabBarIcon from "./TabBarIcon";
 import CustomButton from "./CustomButton";
 import CustomHeader from "./CustomHeader";
 import ScrollableView from "./ScrollableView";
-import ScrollableTabView from "./ScrollableTabView"
+import ScrollableTabView from "./ScrollableTabView";
+import LoadingSpinnerOverlay from "./LoadingSpinnerOverlay"
 
 export {
   PasswordInputText,
@@ -13,5 +14,6 @@ export {
   CustomButton,
   CustomHeader,
   ScrollableView,
-  ScrollableTabView
+  ScrollableTabView,
+  LoadingSpinnerOverlay
 };

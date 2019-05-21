@@ -11,7 +11,6 @@ export default () => {
   return (
     <ScrollableTabView
       style={{ marginTop: 20, height: width, marginLeft: 15 }}
-      
       initialPage={0}
       renderTabBar={() => <ScrollableTabBar />}
       

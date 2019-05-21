@@ -8,17 +8,47 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  ActivityIndicator,
+  ProgressBarAndroid,
+  ActivityIndicatorIOS
 } from "react-native";
 import { Images, Color } from "common_f";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { LoadingSpinnerOverlay } from "component_f";
 
 const { width, height } = Dimensions.get("window");
 
 class Signup extends Component {
+  _renderActivityIndicator() {
+    return ActivityIndicator ? (
+      <ActivityIndicator
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    ) : Platform.OS == "android" ? (
+      <ProgressBarAndroid color={Color.secondary} styleAttr={"small"} />
+    ) : (
+      <ActivityIndicatorIOS
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    );
+  }
+
+  _showModal_2_LoadingSpinnerOverLay = () => {
+    this._modal_2_LoadingSpinnerOverLay.show();
+    //simulate http request
+    setTimeout(() => {
+      this._modal_2_LoadingSpinnerOverLay.hide();
+    }, 3000);
+  };
+
   render() {
     return (
       <ScrollView>
@@ -122,7 +152,7 @@ class Signup extends Component {
 
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={this.props.onLoginPress}
+              onPress={this._showModal_2_LoadingSpinnerOverLay}
             >
               <LinearGradient
                 start={{ x: 0, y: 0 }}
@@ -154,6 +184,12 @@ class Signup extends Component {
           </View>
           {/* <Text style={{ fontFamily: "Nunito-Black", color: "black" }}>test</Text>
         <Text style={{color:"black"}}>test</Text> */}
+          <LoadingSpinnerOverlay
+            
+            ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
+          >
+            {this._renderActivityIndicator()}
+          </LoadingSpinnerOverlay>
         </KeyboardAvoidingView>
       </ScrollView>
     );

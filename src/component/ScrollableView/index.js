@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   View,
   StyleSheet,
@@ -7,10 +7,10 @@ import {
   Image,
   FlatList,
   Platform
-} from 'react-native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { Color } from 'common_f';
-import { ScrollView } from 'react-native-gesture-handler';
+} from "react-native";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { Color } from "common_f";
+import { ScrollView } from "react-native-gesture-handler";
 
 const mocks = [1, 2, 3, 4];
 
@@ -20,8 +20,8 @@ const FirstRoute = item => (
     style={[
       styles.shadow,
       {
-        flexDirection: 'row',
-        backgroundColor: '#fff',
+        flexDirection: "row",
+        backgroundColor: "#fff",
         padding: 15,
         marginHorizontal: 4,
         marginVertical: 6,
@@ -29,27 +29,27 @@ const FirstRoute = item => (
       }
     ]}
   >
-    <View style={{ flex: 0.3, paddingRight: Platform.OS === 'ios' ? 14 : 0 }}>
+    <View style={{ flex: 0.3, paddingRight: Platform.OS === "ios" ? 14 : 0 }}>
       <Image
         style={{ width: 85, height: 85, borderRadius: 6 }}
         source={{
           uri:
-            'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
+            "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
         }}
       />
     </View>
     <View
       style={{
         flex: 0.7,
-        flexDirection: 'column'
+        flexDirection: "column"
       }}
     >
-      <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+      <View style={{ justifyContent: "space-between", flexDirection: "row" }}>
         <Text
           style={{
             color: Color.black,
             fontSize: 16,
-            fontFamily: 'Nunito-Bold'
+            fontFamily: "Nunito-Bold"
           }}
         >
           Chicken Sandwich
@@ -58,7 +58,7 @@ const FirstRoute = item => (
       <Text
         style={{
           color: Color.gray2,
-          fontFamily: 'Nunito-Regular',
+          fontFamily: "Nunito-Regular",
           fontSize: 12,
           marginVertical: 5
         }}
@@ -68,7 +68,7 @@ const FirstRoute = item => (
       <Text
         style={{
           color: Color.secondary,
-          fontFamily: 'Nunito-Bold',
+          fontFamily: "Nunito-Bold",
           marginRight: 10
         }}
       >
@@ -90,16 +90,16 @@ const Route = () => {
   );
 };
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 
 export default class ScrollableView extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'Breakfast' },
-      { key: 'second', title: 'Lunch' },
-      { key: 'third', title: 'Dinner' },
-      { key: 'fourth', title: 'Special Item' }
+      { key: "first", title: "Breakfast" },
+      { key: "second", title: "Lunch" },
+      { key: "third", title: "Dinner" },
+      { key: "fourth", title: "Special Item" }
     ]
   };
 
@@ -121,14 +121,14 @@ export default class ScrollableView extends React.Component {
           <TabBar
             {...props}
             scrollEnabled={true}
-            indicatorStyle={{ backgroundColor: 'transparent' }}
-            style={{ backgroundColor: 'transparent', borderRadius: 14 }}
-            tabStyle={{ backgroundColor: 'transparent', width: width / 3.18 }}
+            indicatorStyle={{ backgroundColor: "transparent" }}
+            style={{ backgroundColor: "transparent", overflow: "hidden" }}
+            tabStyle={{ backgroundColor: "transparent", width: width / 3.18 }}
             renderLabel={({ route, focused }) => {
               const color = focused ? Color.tertiary : Color.gray;
               const backgroundColor = focused
-                ? 'rgba(241, 187, 58,0.3)'
-                : 'transparent';
+                ? "rgba(241, 187, 58,0.3)"
+                : "transparent";
               return (
                 <View
                   style={{
@@ -141,8 +141,7 @@ export default class ScrollableView extends React.Component {
                   <Text
                     style={{
                       color,
-
-                      fontFamily: 'Nunito-SemiBold',
+                      fontFamily: "Nunito-SemiBold",
                       margin: 0
                     }}
                   >
