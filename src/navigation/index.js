@@ -19,6 +19,7 @@ import ProductDetailScreen from "./ProductDetailScreen";
 import UserProfileScreen from "./UserProfileScreen";
 import EditProfileScreen from "./EditProfileScreen";
 import SaveProfileScreen from "./SaveProfileScreen";
+import ViewAllScreen from "./ViewAllScreen";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -41,7 +42,8 @@ const HomeScreenStack = createStackNavigator(
     Product: ProductDetailScreen,
     UserProfile: UserProfileScreen,
     EditProfile: EditProfileScreen,
-    SaveProfile: SaveProfileScreen
+    SaveProfile: SaveProfileScreen,
+    ViewAll: ViewAllScreen
   },
   {
     mode: "modal"

@@ -14,15 +14,22 @@ import { Images, Color } from "common_f";
 import { CustomButton } from "component_f";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 const { width, height } = Dimensions.get("window");
 
 class Login extends Component {
-  state = {
-    email: "",
-    password: "",
-    errors: []
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      icEye: "visibility-off",
+      password: true,
+      email: "",
+      passwordtext: "",
+      errors: []
+    };
+  }
 
   handleLogin() {
     const { onLoginPress } = this.props;
@@ -49,8 +56,26 @@ class Login extends Component {
     }
   }
 
+  changePwdType = () => {
+    let newState;
+    if (this.state.password) {
+      newState = {
+        icEye: "visibility",
+        password: false
+      };
+    } else {
+      newState = {
+        icEye: "visibility-off",
+        password: true
+      };
+    }
+
+    // set new state value
+    this.setState(newState);
+  };
+
   render() {
-    const { email, password, errors } = this.state;
+    const { email, passwordtext, errors, password } = this.state;
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
     return (
       <ScrollView>
@@ -96,10 +121,18 @@ class Login extends Component {
               />
               <TextInput
                 style={[styles.input]}
-                onChangeText={text => this.setState({ password: text })}
+                onChangeText={text => this.setState({ passwordtext: text })}
                 placeholder="Password"
                 placeholderTextColor={Color.gray}
-                defaultValue={password}
+                defaultValue={passwordtext}
+                secureTextEntry={password}
+              />
+              <MaterialIcon
+                style={styles.icon}
+                name={this.state.icEye}
+                size={20}
+                color={Color.gray}
+                onPress={this.changePwdType}
               />
             </View>
 
@@ -173,5 +206,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F9FAFF",
     fontFamily: "Nunito-Regular",
     borderRadius: 5
+  },
+  icon: {
+    position: "absolute",
+    top: 15,
+    right: 10
   }
 });

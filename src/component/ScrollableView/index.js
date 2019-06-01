@@ -6,11 +6,11 @@ import {
   Text,
   Image,
   FlatList,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { Color } from "common_f";
-import { ScrollView } from "react-native-gesture-handler";
 
 const mocks = [1, 2, 3, 4];
 

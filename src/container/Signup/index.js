@@ -18,11 +18,63 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { LoadingSpinnerOverlay } from "component_f";
 
 const { width, height } = Dimensions.get("window");
 
 class Signup extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      icEye: "visibility-off",
+      confirm: "visibility-off",
+      password: true,
+      confirmPassword: true,
+      email: "",
+      passwordtext: "",
+      confirmPasswordText: "",
+      errors: []
+    };
+  }
+
+  changePwdType = () => {
+    let newState;
+    if (this.state.password) {
+      newState = {
+        icEye: "visibility",
+        password: false
+      };
+    } else {
+      newState = {
+        icEye: "visibility-off",
+        password: true
+      };
+    }
+
+    // set new state value
+    this.setState(newState);
+  };
+
+  changeConfirmPwdType = () => {
+    let newState;
+    if (this.state.confirmPassword) {
+      newState = {
+        confirm: "visibility",
+        confirmPassword: false
+      };
+    } else {
+      newState = {
+        confirm: "visibility-off",
+        confirmPassword: true
+      };
+    }
+
+    // set new state value
+    this.setState(newState);
+  };
+
   _renderActivityIndicator() {
     return ActivityIndicator ? (
       <ActivityIndicator
@@ -50,6 +102,13 @@ class Signup extends Component {
   };
 
   render() {
+    const {
+      email,
+      passwordtext,
+      errors,
+      password,
+      confirmPassword
+    } = this.state;
     return (
       <ScrollView>
         <KeyboardAvoidingView
@@ -130,9 +189,17 @@ class Signup extends Component {
               />
               <TextInput
                 style={[styles.input]}
+                onChangeText={text => this.setState({ passwordtext: text })}
                 placeholder="Password"
                 placeholderTextColor={Color.gray}
-                keyboardType={"email-address"}
+                secureTextEntry={password}
+              />
+              <MaterialIcon
+                style={styles.icon}
+                name={this.state.icEye}
+                size={20}
+                color={Color.gray}
+                onPress={this.changePwdType}
               />
             </View>
 
@@ -146,7 +213,18 @@ class Signup extends Component {
               <TextInput
                 style={[styles.input]}
                 placeholder="Confirm Password"
+                onChangeText={text =>
+                  this.setState({ confirmPasswordText: text })
+                }
                 placeholderTextColor={Color.gray}
+                secureTextEntry={confirmPassword}
+              />
+              <MaterialIcon
+                style={styles.icon}
+                name={this.state.confirm}
+                size={20}
+                color={Color.gray}
+                onPress={this.changeConfirmPwdType}
               />
             </View>
 
@@ -185,7 +263,6 @@ class Signup extends Component {
           {/* <Text style={{ fontFamily: "Nunito-Black", color: "black" }}>test</Text>
         <Text style={{color:"black"}}>test</Text> */}
           <LoadingSpinnerOverlay
-            
             ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
           >
             {this._renderActivityIndicator()}
@@ -222,5 +299,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F9FAFF",
     fontFamily: "Nunito-Regular",
     borderRadius: 5
+  },
+  icon: {
+    position: "absolute",
+    top: 15,
+    right: 10
   }
 });

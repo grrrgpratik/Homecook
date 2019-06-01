@@ -2,8 +2,8 @@
 
 export default {
   accent: "#F3534A",
-  primary: "#0AC4BA",
-  secondary: "#2BDA8E",
+  primary: "#00C68E",
+  secondary: "#3DCC8E",
   tertiary: "#f1bb3a",
   black: "#525257",
   white: "#FFFFFF",
