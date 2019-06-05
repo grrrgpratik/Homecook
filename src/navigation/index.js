@@ -20,6 +20,8 @@ import UserProfileScreen from "./UserProfileScreen";
 import EditProfileScreen from "./EditProfileScreen";
 import SaveProfileScreen from "./SaveProfileScreen";
 import ViewAllScreen from "./ViewAllScreen";
+import ForgetPasswordScreen from "./ForgetPassword";
+import SignUpComplete from "./SignUpComplete";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -28,7 +30,9 @@ const LoginStack = createStackNavigator(
   {
     Welcome: WelcomeScreen,
     Login: LoginScreen,
-    Signup: SignupScreen
+    Signup: SignupScreen,
+    ForgetPassword: ForgetPasswordScreen,
+    SignUpComplete: SignUpComplete
   },
   {
     mode: "modal"
@@ -112,7 +116,7 @@ const AppNavigator = createBottomTabNavigator(
 );
 
 const MainAppNavigation = createSwitchNavigator({
-  // Au thLoading: { screen: AuthLoadingScreen },
+  AuthLoading: { screen: AuthLoadingScreen },
   LoginStack: { screen: LoginStack },
   Dashboard: { screen: AppNavigator }
 });

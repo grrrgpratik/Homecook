@@ -1,25 +1,35 @@
 import React, { Component } from "react";
-import { 
-    View,
-    Text,
-    StyleSheet
-} from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import { Images } from "common_f";
+const { width, height } = Dimensions.get("window");
 
-class AuthLoadingScreen extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>AuthLoadingScreen</Text>
-            </View>
-        );
-    }
+export default class AuthLoadingScreen extends Component {
+  constructor() {
+    super();
+    this.loadApp();
+  }
+
+  loadApp = async () => {
+    const userToken = await AsyncStorage.getItem("token");
+    this.props.navigation.navigate(userToken ? "Dashboard" : "Auth");
+  };
+
+  render() {
+    return (
+      <Image
+        style={styles.container}
+        source={Images.SplashScreen}
+        resizeMode="contain"
+      />
+    );
+  }
 }
-export default AuthLoadingScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+  container: {
+    height: height,
+    width: width,
+    resizeMode: "contain"
+  }
 });

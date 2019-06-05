@@ -13,13 +13,15 @@ import {
   ProgressBarAndroid,
   ActivityIndicatorIOS
 } from "react-native";
-import { Images, Color } from "common_f";
+import { Images, Color, Config } from "common_f";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { LoadingSpinnerOverlay } from "component_f";
+import fetch from "react-native-fetch-polyfill";
+import { toast } from "app_f/Omni";
 
 const { width, height } = Dimensions.get("window");
 
@@ -33,6 +35,8 @@ class Signup extends Component {
       password: true,
       confirmPassword: true,
       email: "",
+      fullname: "",
+      phonenumber: "",
       passwordtext: "",
       confirmPasswordText: "",
       errors: []
@@ -95,22 +99,66 @@ class Signup extends Component {
 
   _showModal_2_LoadingSpinnerOverLay = () => {
     this._modal_2_LoadingSpinnerOverLay.show();
-    //simulate http request
-    setTimeout(() => {
+    const {
+      email,
+      passwordtext,
+      fullname,
+      phonenumber,
+      confirmPasswordText
+    } = this.state;
+
+    if (passwordtext === confirmPasswordText) {
+      const fetchOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          password: passwordtext,
+          full_name: fullname,
+          phonenumber: phonenumber,
+          profile_pic: null
+        }),
+        timeout: 10000
+      };
+
+      fetch(Config.signUpUrl, fetchOptions)
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            response.json().then(responseJSON => {
+              console.log(responseJSON);
+              this._modal_2_LoadingSpinnerOverLay.hide();
+              this.props.onSignUpPress();
+            });
+          } else {
+            response.json().then(responseJSON => {
+              this._modal_2_LoadingSpinnerOverLay.hide();
+              toast(responseJSON.message);
+            });
+          }
+        })
+        .catch(() => {
+          this._modal_2_LoadingSpinnerOverLay.hide();
+          toast("Network request failed");
+        });
+    } else {
       this._modal_2_LoadingSpinnerOverLay.hide();
-    }, 3000);
+      toast("Passwords don't match");
+    }
   };
 
   render() {
     const {
       email,
       passwordtext,
-      errors,
+      fullname,
+      phonenumber,
       password,
-      confirmPassword
+      confirmPassword,
+      confirmPasswordText
     } = this.state;
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <KeyboardAvoidingView
           style={styles.container}
           behavior="padding"
@@ -144,6 +192,8 @@ class Signup extends Component {
               />
               <TextInput
                 style={styles.input}
+                value={email}
+                onChangeText={text => this.setState({ email: text })}
                 placeholder="Email-address"
                 placeholderTextColor={Color.gray}
                 keyboardType={"email-address"}
@@ -159,6 +209,8 @@ class Signup extends Component {
               />
               <TextInput
                 style={[styles.input]}
+                value={fullname}
+                onChangeText={text => this.setState({ fullname: text })}
                 placeholder="Your Name"
                 placeholderTextColor={Color.gray}
                 keyboardType={"email-address"}
@@ -174,6 +226,8 @@ class Signup extends Component {
               />
               <TextInput
                 style={[styles.input]}
+                value={phonenumber}
+                onChangeText={text => this.setState({ phonenumber: text })}
                 placeholder="Phone Number"
                 placeholderTextColor={Color.gray}
                 keyboardType={"email-address"}
@@ -189,6 +243,7 @@ class Signup extends Component {
               />
               <TextInput
                 style={[styles.input]}
+                value={passwordtext}
                 onChangeText={text => this.setState({ passwordtext: text })}
                 placeholder="Password"
                 placeholderTextColor={Color.gray}
@@ -212,6 +267,7 @@ class Signup extends Component {
               />
               <TextInput
                 style={[styles.input]}
+                value={confirmPasswordText}
                 placeholder="Confirm Password"
                 onChangeText={text =>
                   this.setState({ confirmPasswordText: text })

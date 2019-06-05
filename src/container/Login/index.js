@@ -8,13 +8,17 @@ import {
   Dimensions,
   TextInput,
   ScrollView,
-  Keyboard
+  ActivityIndicator,
+  TouchableOpacity
 } from "react-native";
-import { Images, Color } from "common_f";
-import { CustomButton } from "component_f";
+import { Images, Color, Config } from "common_f";
+import { CustomButton, LoadingSpinnerOverlay } from "component_f";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { toast } from "app_f/Omni";
+import fetch from "react-native-fetch-polyfill";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const { width, height } = Dimensions.get("window");
 
@@ -31,29 +35,70 @@ class Login extends Component {
     };
   }
 
-  handleLogin() {
-    const { onLoginPress } = this.props;
-    const { email, password, errors } = this.state;
-    //const errors = [];
-
-    this.setState({ errors: [] });
-
-    Keyboard.dismiss();
-    // console.log(email, password);
-    // if (email === "" || email === null) {
-    //   errors.push("email");
-    //   this.setState({ errors });
-    // }
-    // console.log(errors);
-
-    // if (password === "" || password === null) {
-    //   errors.push("password");
-    //   this.setState({ errors });
-    // }
-    console.log(errors);
-    if (!errors.length) {
-      onLoginPress();
+  async onValueChange(item, selectedValue) {
+    try {
+      console.log(selectedValue);
+      await AsyncStorage.setItem(item, selectedValue);
+    } catch (error) {
+      console.log("AsyncStorage error: " + error.message);
     }
+  }
+
+  handleLogin() {
+    this._modal_2_LoadingSpinnerOverLay.show();
+    const { onLoginPress } = this.props;
+    const { email, passwordtext, errors } = this.state;
+    //const errors = [];
+    console.log(email, passwordtext);
+    const fetchOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        password: passwordtext
+      }),
+      timeout: 10000
+    };
+
+    fetch(Config.loginUrl, fetchOptions)
+      .then(response => {
+        console.log(response);
+        if (response.status === 200) {
+          response.json().then(responseJSON => {
+            console.log(responseJSON);
+            this.onValueChange("token", responseJSON.token);
+            this._modal_2_LoadingSpinnerOverLay.hide();
+            onLoginPress();
+          });
+        } else {
+          response.json().then(responseJSON => {
+            this._modal_2_LoadingSpinnerOverLay.hide();
+            toast(responseJSON.message);
+          });
+        }
+      })
+      .catch(() => {
+        this._modal_2_LoadingSpinnerOverLay.hide();
+        toast("Network request failed");
+      });
+  }
+
+  _renderActivityIndicator() {
+    return ActivityIndicator ? (
+      <ActivityIndicator
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    ) : Platform.OS == "android" ? (
+      <ProgressBarAndroid color={Color.secondary} styleAttr={"small"} />
+    ) : (
+      <ActivityIndicatorIOS
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    );
   }
 
   changePwdType = () => {
@@ -78,7 +123,7 @@ class Login extends Component {
     const { email, passwordtext, errors, password } = this.state;
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <KeyboardAvoidingView
           style={styles.container}
           behavior="padding"
@@ -140,9 +185,15 @@ class Login extends Component {
               buttonText={"LOGIN"}
               onButtonPress={() => this.handleLogin()}
             />
-
-            <Text style={styles.forgetText}>Forgot your password?</Text>
+            <TouchableOpacity onPress={this.props.onForgetPasswordPress}>
+              <Text style={styles.forgetText}>Forgot your password?</Text>
+            </TouchableOpacity>
           </View>
+          <LoadingSpinnerOverlay
+            ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
+          >
+            {this._renderActivityIndicator()}
+          </LoadingSpinnerOverlay>
         </KeyboardAvoidingView>
       </ScrollView>
     );

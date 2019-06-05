@@ -13,7 +13,7 @@ const Images = {
   IconMap: require("images_f/icons/maps_icon.png"),
   Profile: require("images_f/profile.jpg"),
 
-
+  SplashScreen: require("images_f/splash_screen.png"),
   AlooDum: require("images_f/aloo-dum.png"),
   BiryaniChicken: require("images_f/Biryani-chicken.png"),
   BuffSamayaBaji: require("images_f/Buff-Samaya-Baji.png"),

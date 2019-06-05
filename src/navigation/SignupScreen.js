@@ -8,7 +8,8 @@ class SignupScreen extends Component {
   };
 
   render() {
-    return <Signup />;
+    const { navigate } = this.props.navigation;
+    return <Signup onSignUpPress={() => navigate("SignUpComplete")} />;
   }
 }
 export default SignupScreen;

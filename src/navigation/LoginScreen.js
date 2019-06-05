@@ -13,7 +13,8 @@ class LoginScreen extends PureComponent {
   };
   render() {
     const { navigate } = this.props.navigation;
-    return <Login onLoginPress={() => navigate("Home")} />;
+    return <Login onLoginPress={() => navigate("Home")}
+                   onForgetPasswordPress={()=> navigate("ForgetPassword")} />;
   }
 }
 export default LoginScreen;
