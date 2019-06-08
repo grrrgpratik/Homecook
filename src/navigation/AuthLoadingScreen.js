@@ -12,7 +12,7 @@ export default class AuthLoadingScreen extends Component {
 
   loadApp = async () => {
     const userToken = await AsyncStorage.getItem("token");
-    this.props.navigation.navigate(userToken ? "Dashboard" : "Auth");
+    this.props.navigation.navigate(userToken ? "Dashboard" : "LoginStack");
   };
 
   render() {

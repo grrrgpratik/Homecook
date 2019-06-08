@@ -20,6 +20,8 @@ const Images = {
   ChickenCurryRice: require("images_f/chicken-curry-rice.png"),
   ChickenMomo: require("images_f/chicken-momo.png"),
   Sandwich: require("images_f/veg-sandwich.png"),
+  ForgetPassword: require("images_f/forget_password.png"),
+  EmailSend: require("images_f/email_sent.png")
 };
 
 export default Images;
