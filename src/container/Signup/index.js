@@ -286,7 +286,7 @@ class Signup extends Component {
 
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={this._showModal_2_LoadingSpinnerOverLay}
+              onPress={()=>this.props.onSignUpPress()}
             >
               <LinearGradient
                 start={{ x: 0, y: 0 }}
