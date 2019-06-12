@@ -9,7 +9,7 @@ import {
   Dimensions,
   ScrollView
 } from "react-native";
-import { Color } from "common_f";
+import { Color, Config } from "common_f";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const { width } = Dimensions.get("window");
@@ -183,7 +183,7 @@ class ViewAll extends Component {
           // scrollEventThrottle={100}
           // snapToInterval={width - 60}
           // snapToAlignment="center"
-          data={mocks}
+          data={this.props.product}
           keyExtractor={item => `${item.id}`}
           renderItem={({ item, index }) =>
             this.renderRecommendation(item, index)
@@ -198,18 +198,18 @@ class ViewAll extends Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.5}
-        onPress={this.props.onProductDetailScreen}
+        onPress={() => this.props.onProductDetailScreen({ item })}
         // style={[styles.shadow, { backgroundColor: 'red' }]}
       >
         <View style={[styles.recommendation, styles.shadow]}>
           <View style={[styles.recommendationHeader, styles.shadow]}>
             <Image
               style={styles.recommendationImage}
-              source={{ uri: item.preview }}
+              source={{ uri: `${Config.baseUrl}${item.image_url[0].image}` }}
             />
           </View>
           <View style={[styles.bottomContainer, styles.shadow]}>
-            <Text style={styles.recommendationTitle}>{item.title} </Text>
+            <Text style={styles.recommendationTitle}>{item.name} </Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={styles.recommendlocation}>
                 Rs. {Number(item.price)}
@@ -225,7 +225,7 @@ class ViewAll extends Component {
                   backgroundColor: Color.black
                 }}
               />
-              <Text style={styles.recommendlocation}> {item.location}</Text>
+              <Text style={styles.recommendlocation}> 0.4km from you</Text>
             </View>
             <View style={styles.recommendRating}>
               {this.renderRatings(item.rating)}

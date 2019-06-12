@@ -27,7 +27,14 @@ class ViewAllScreen extends Component {
     };
   };
   render() {
-    return <ViewAll onProductDetailScreen={() => navigate("Product")} />;
+    const { navigate, state } = this.props.navigation;
+    console.log(state.params);
+    return (
+      <ViewAll
+        product={state.params.product.recommended}
+        onProductDetailScreen={product => navigate("Product", { product })}
+      />
+    );
   }
 }
 export default ViewAllScreen;
