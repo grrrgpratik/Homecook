@@ -1,4 +1,4 @@
-const baseUrl = "http://192.168.100.93:8000";
+const baseUrl = "http://192.168.100.100:8000";
 
 const loginUrl = baseUrl + "/api/accounts/login/";
 

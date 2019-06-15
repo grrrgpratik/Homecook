@@ -306,15 +306,15 @@ class Cart extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {/* {this.renderHeader()}
-        {this.renderCartItem()}
-        {this.renderSubTotal()}
-        <View style={styles.buttonContainer}>
-          <CustomButton buttonText={'PROCEED TO CHECKOUT'} />
-        </View> */}
-        <EmptyCart />
-      </View>
+      // <View style={styles.container}>
+      //   {this.renderHeader()}
+      //   {this.renderCartItem()}
+      //   {this.renderSubTotal()}
+      //   <View style={styles.buttonContainer}>
+      //     <CustomButton buttonText={'PROCEED TO CHECKOUT'} />
+      //   </View>
+      //   </View>
+      <EmptyCart onEmptyCartPress={this.props.onHomeScreenPress} />
     );
   }
 }
