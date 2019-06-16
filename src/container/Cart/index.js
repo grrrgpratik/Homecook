@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   StyleSheet,
@@ -7,57 +7,57 @@ import {
   Image,
   FlatList,
   Dimensions
-} from 'react-native';
-import { Color } from 'common_f';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { CustomButton } from 'component_f';
+} from "react-native";
+import { Color } from "common_f";
+import Icon from "react-native-vector-icons/Ionicons";
+import { CustomButton, EmptyCart } from "component_f";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const mocks = [
   {
     id: 1,
     user: {
-      name: 'Chicken Momo',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Chicken Momo",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: true,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Santorini',
+    title: "Santorini",
     description:
-      'Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC',
+      "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC",
     rating: 4.3,
     price: 224.0,
     reviews: 3212,
     preview:
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 2,
     user: {
-      name: 'Fried Rice',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Fried Rice",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: false,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Loutraki',
-    description: 'This attractive small town, 80 kilometers from Athens',
+    title: "Loutraki",
+    description: "This attractive small town, 80 kilometers from Athens",
     rating: 4.6,
     reviews: 3212,
     price: 122.0,
     preview:
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
     ]
   }
 ];
@@ -74,9 +74,9 @@ class Cart extends Component {
   renderCartItem() {
     return (
       <View style={styles.recommendContainer}>
-        <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: "column" }}>
           <FlatList
-            style={{ overflow: 'visible' }}
+            style={{ overflow: "visible" }}
             data={mocks}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) => this.renderItem(item, index)}
@@ -92,8 +92,8 @@ class Cart extends Component {
         style={[
           styles.shadow,
           {
-            flexDirection: 'row',
-            backgroundColor: '#fff',
+            flexDirection: "row",
+            backgroundColor: "#fff",
             padding: 15,
             //marginHorizontal: 20,
             marginLeft: 32,
@@ -112,22 +112,22 @@ class Cart extends Component {
         <View
           style={{
             flex: 0.75,
-            flexDirection: 'column'
+            flexDirection: "column"
           }}
         >
           <View
             style={{
-              justifyContent: 'space-between',
+              justifyContent: "space-between",
               //alignItems: "flex-start",
-              flexDirection: 'row'
+              flexDirection: "row"
             }}
           >
-            <View style={{ flexDirection: 'column' }}>
+            <View style={{ flexDirection: "column" }}>
               <Text
                 style={{
                   color: Color.black,
                   fontSize: 16,
-                  fontFamily: 'Nunito-Bold'
+                  fontFamily: "Nunito-Bold"
                 }}
               >
                 {item.title}
@@ -135,7 +135,7 @@ class Cart extends Component {
               <Text
                 style={{
                   color: Color.secondary,
-                  fontFamily: 'Nunito-Bold',
+                  fontFamily: "Nunito-Bold",
                   marginRight: 10,
                   marginBottom: 10
                 }}
@@ -146,12 +146,12 @@ class Cart extends Component {
 
             <View
               style={{
-                justifyContent: 'flex-start'
+                justifyContent: "flex-start"
               }}
             >
               <Icon
                 style={{ padding: 4 }}
-                name='ios-close'
+                name="ios-close"
                 size={30}
                 color={Color.black}
               />
@@ -160,8 +160,8 @@ class Cart extends Component {
 
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between'
+              flexDirection: "row",
+              justifyContent: "space-between"
               // backgroundColor: "red"
             }}
           >
@@ -169,7 +169,7 @@ class Cart extends Component {
               style={{
                 color: Color.black,
                 fontSize: 14,
-                fontFamily: 'Nunito-Regular'
+                fontFamily: "Nunito-Regular"
               }}
             >
               Made by:
@@ -177,19 +177,19 @@ class Cart extends Component {
                 style={{
                   color: Color.gray,
                   fontSize: 14,
-                  fontFamily: 'Nunito-Regular'
+                  fontFamily: "Nunito-Regular"
                 }}
               >
-                {' Pratik Gurung'}
+                {" Pratik Gurung"}
               </Text>
             </Text>
 
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: "row" }}>
               <Text
                 style={{
                   color: Color.gray,
                   fontSize: 20,
-                  fontFamily: 'Nunito-Regular',
+                  fontFamily: "Nunito-Regular",
                   paddingHorizontal: 10
                 }}
               >
@@ -202,7 +202,7 @@ class Cart extends Component {
                 style={{
                   color: Color.gray,
                   fontSize: 20,
-                  fontFamily: 'Nunito-Regular',
+                  fontFamily: "Nunito-Regular",
                   paddingHorizontal: 10
                 }}
               >
@@ -220,8 +220,8 @@ class Cart extends Component {
       <View style={{ paddingBottom: 28 }}>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
+            flexDirection: "row",
+            justifyContent: "space-evenly",
             marginLeft: width * 0.5,
             paddingVertical: 4
           }}
@@ -230,7 +230,7 @@ class Cart extends Component {
             style={{
               color: Color.gray,
               fontSize: 14,
-              fontFamily: 'Nunito-Bold'
+              fontFamily: "Nunito-Bold"
             }}
           >
             Sub Total
@@ -239,7 +239,7 @@ class Cart extends Component {
             style={{
               color: Color.gray,
               fontSize: 14,
-              fontFamily: 'Nunito-Bold'
+              fontFamily: "Nunito-Bold"
             }}
           >
             Rs. 100
@@ -247,8 +247,8 @@ class Cart extends Component {
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
+            flexDirection: "row",
+            justifyContent: "space-evenly",
             marginLeft: width * 0.5,
             paddingVertical: 4
           }}
@@ -257,7 +257,7 @@ class Cart extends Component {
             style={{
               color: Color.gray,
               fontSize: 14,
-              fontFamily: 'Nunito-Bold'
+              fontFamily: "Nunito-Bold"
             }}
           >
             Delivery
@@ -266,7 +266,7 @@ class Cart extends Component {
             style={{
               color: Color.gray,
               fontSize: 14,
-              fontFamily: 'Nunito-Bold'
+              fontFamily: "Nunito-Bold"
             }}
           >
             Rs. 10
@@ -275,8 +275,8 @@ class Cart extends Component {
 
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
+            flexDirection: "row",
+            justifyContent: "space-evenly",
             marginLeft: width * 0.5,
             paddingVertical: 4
           }}
@@ -285,7 +285,7 @@ class Cart extends Component {
             style={{
               color: Color.black,
               fontSize: 18,
-              fontFamily: 'Nunito-Black'
+              fontFamily: "Nunito-Black"
             }}
           >
             Total
@@ -294,7 +294,7 @@ class Cart extends Component {
             style={{
               color: Color.black,
               fontSize: 18,
-              fontFamily: 'Nunito-Black'
+              fontFamily: "Nunito-Black"
             }}
           >
             Rs. 100
@@ -306,14 +306,15 @@ class Cart extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.renderHeader()}
-        {this.renderCartItem()}
-        {this.renderSubTotal()}
-        <View style={styles.buttonContainer}>
-          <CustomButton buttonText={'PROCEED TO CHECKOUT'} />
-        </View>
-      </View>
+      // <View style={styles.container}>
+      //   {this.renderHeader()}
+      //   {this.renderCartItem()}
+      //   {this.renderSubTotal()}
+      //   <View style={styles.buttonContainer}>
+      //     <CustomButton buttonText={'PROCEED TO CHECKOUT'} />
+      //   </View>
+      //   </View>
+      <EmptyCart onEmptyCartPress={this.props.onHomeScreenPress} />
     );
   }
 }
@@ -322,7 +323,7 @@ export default Cart;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fcfcfc'
+    backgroundColor: "#fcfcfc"
   },
   header: {
     padding: 20
@@ -330,15 +331,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: Color.black,
-    fontFamily: 'Nunito-Black',
+    fontFamily: "Nunito-Black",
     paddingHorizontal: 10,
-    marginTop: Platform.OS === 'ios' ? 14 : 0
+    marginTop: Platform.OS === "ios" ? 14 : 0
   },
   searchSection: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F9FAFF',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F9FAFF",
     margin: 32,
     borderRadius: 22
   },
@@ -351,42 +352,42 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
-    backgroundColor: '#F9FAFF',
+    backgroundColor: "#F9FAFF",
     color: Color.gray,
-    backgroundColor: '#F9FAFF',
-    fontFamily: 'Nunito-Regular',
+    backgroundColor: "#F9FAFF",
+    fontFamily: "Nunito-Regular",
     borderRadius: 22
   },
   recentSearchText: {
     color: Color.black,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: "Nunito-Bold",
     paddingHorizontal: 34,
     paddingBottom: 10,
     fontSize: 20
   },
   recentText: {
     color: Color.gray,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: "Nunito-Regular",
     paddingHorizontal: 34,
     paddingBottom: 10,
     fontSize: 16
   },
-  recommendContainer: { flex: 1, flexDirection: 'column', paddingTop: 7 },
+  recommendContainer: { flex: 1, flexDirection: "column", paddingTop: 7 },
   recommendedHeader: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     paddingHorizontal: 36,
     paddingVertical: 20,
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   recommendText: {
     fontSize: 14 * 1.4,
     color: Color.black,
-    fontFamily: 'Nunito-Black'
+    fontFamily: "Nunito-Black"
   },
-  viewAllText: { color: Color.gray2, fontFamily: 'Nunito-Regular' },
+  viewAllText: { color: Color.gray2, fontFamily: "Nunito-Regular" },
   shadow: {
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOffset: {
       width: 0,
       height: 6
@@ -405,14 +406,14 @@ const styles = StyleSheet.create({
     // right: 0,
     paddingHorizontal: 32,
 
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingBottom: 20
     //alignItems: "flex-start"
   },
   regularText: {
     color: Color.black,
     fontSize: 18,
-    fontFamily: 'Nunito-Black',
-    alignSelf: 'center'
+    fontFamily: "Nunito-Black",
+    alignSelf: "center"
   }
 });

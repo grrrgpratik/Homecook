@@ -9,132 +9,22 @@ import {
   ScrollView,
   Animated,
   TouchableOpacity,
-  Platform
+  Platform,
+  ActivityIndicator,
+  ProgressBarAndroid,
+  ActivityIndicatorIOS
 } from "react-native";
-import { Color, Images } from "common_f";
+import { Color, Images, Config } from "common_f";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
-import { CustomHeader } from "component_f";
+import { CustomHeader, LoadingSpinnerOverlay } from "component_f";
 import Geocoder from "react-native-geocoder";
 import { connect } from "react-redux";
 import { toast } from "app_f/Omni";
 import { Snackbar } from "react-native-paper";
-
+import fetch from "react-native-fetch-polyfill";
+import AsyncStorage from "@react-native-community/async-storage";
 const { width } = Dimensions.get("window");
-const ENTRIES1 = [
-  {
-    title: "Momo Chicken",
-    subtitle: "Rs 150",
-    illustration: Images.ChickenMomo
-  },
-  {
-    title: "Biryani Chicken",
-    subtitle:
-      "Biryani, is a mixed rice dish with its origins among the Muslims of the Indian subcontinent.",
-    illustration: Images.BiryaniChicken
-  },
-  {
-    title: "Buff Samaya Baji Set",
-    subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    illustration: Images.BuffSamayaBaji
-  },
-  {
-    title: "Chicken sandwich",
-    subtitle: "Lorem ipsum dolor sit amet",
-    illustration: Images.AlooDum
-  }
-];
-
-const mocks = [
-  {
-    id: 1,
-    user: {
-      name: "Lelia Chavez",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    saved: true,
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Santorini",
-    description:
-      "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC",
-    rating: 4.3,
-    price: 224.0,
-    reviews: 3212,
-    preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
-    ]
-  },
-  {
-    id: 2,
-    user: {
-      name: "Lelia Chavez",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    saved: false,
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Loutraki",
-    description: "This attractive small town, 80 kilometers from Athens",
-    rating: 4.6,
-    reviews: 3212,
-    price: 122.0,
-    preview:
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
-    ]
-  },
-  {
-    id: 3,
-    user: {
-      name: "Lelia Chavez",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    saved: true,
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Santorini",
-    description: "Santorini - Description",
-    rating: 3.2,
-    reviews: 3212,
-    price: 432.0,
-    preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
-    ]
-  },
-  {
-    id: 4,
-    user: {
-      name: "Lelia Chavez",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Loutraki",
-    description: "This attractive small town, 80 kilometers from Athens",
-    rating: 5,
-    reviews: 3212,
-    price: 400.0,
-    preview:
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
-    ]
-  }
-];
 
 class Home extends Component {
   scrollX = new Animated.Value(0);
@@ -143,49 +33,99 @@ class Home extends Component {
     super(props);
     this.state = {
       slider1ActiveSlide: 1,
-      visible: false
+      visible: false,
+      data: ""
     };
   }
 
-  // componentDidMount() {
-  //   console.log("inside component");
-  //   navigator.geolocation.getCurrentPosition(
-  //     position => {
-  //       const geo = {
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude
-  //       };
-  //       Geocoder.geocodePosition(geo)
-  //         .then(res => {
-  //           console.log(res);
-  //           this.props.updateCurrentLocation(
-  //             geo.lng,
-  //             geo.lat,
-  //             res[0].formattedAddress
-  //           );
-  //         })
-  //         .catch(err => toast(err));
-  //     },
-  //     error => {
-  //       console.log(JSON.stringify(error));
-  //       this.setState({ visible: true });
-  //     }
-  //     // {
-  //     //   enableHighAccuracy: false,
-  //     //   timeout: 2000,
-  //     //   maximumAge: 2000
-  //     // }
-  //   );
-  // }
+  componentDidMount() {
+    console.log("inside component");
+    // navigator.geolocation.getCurrentPosition(
+    //   position => {
+    //     const geo = {
+    //       lat: position.coords.latitude,
+    //       lng: position.coords.longitude
+    //     };
+    //     Geocoder.geocodePosition(geo)
+    //       .then(res => {
+    //         console.log(res);
+    //         this.props.updateCurrentLocation(
+    //           geo.lng,
+    //           geo.lat,
+    //           res[0].formattedAddress
+    //         );
+    //       })
+    //       .catch(err => toast(err));
+    //   },
+    //   error => {
+    //     console.log(JSON.stringify(error));
+    //     this.setState({ visible: true });
+    //   })
+    // {
+    //   enableHighAccuracy: false,
+    //   timeout: 2000,
+    //   maximumAge: 2000
+    // }
+    this._modal_2_LoadingSpinnerOverLay.show();
+    AsyncStorage.getItem("token").then(token => {
+      const fetchOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`
+        },
+        timeout: 10000
+      };
+
+      fetch(Config.homeUrl, fetchOptions)
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(responseJSON => {
+              console.log(responseJSON);
+              this.setState({ data: responseJSON });
+              this._modal_2_LoadingSpinnerOverLay.hide();
+            });
+          } else {
+            response.json().then(responseJSON => {
+              this._modal_2_LoadingSpinnerOverLay.hide();
+              toast(responseJSON.message);
+            });
+          }
+        })
+        .catch(() => {
+          this._modal_2_LoadingSpinnerOverLay.hide();
+          toast("Network request failed");
+        });
+    });
+  }
+
+  _renderActivityIndicator() {
+    return ActivityIndicator ? (
+      <ActivityIndicator
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    ) : Platform.OS == "android" ? (
+      <ProgressBarAndroid color={Color.secondary} styleAttr={"small"} />
+    ) : (
+      <ActivityIndicatorIOS
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    );
+  }
 
   renderRecommended = () => {
+    const { recommended } = this.state.data;
     return (
       <View style={styles.recommendContainer}>
         <View style={styles.recommendedHeader}>
           <Text style={styles.recommendText}>Recommended</Text>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={this.props.onViewAllScreen}
+            onPress={() => this.props.onViewAllScreen({ recommended })}
           >
             <Text style={styles.viewAllText}>View all</Text>
           </TouchableOpacity>
@@ -198,9 +138,9 @@ class Home extends Component {
             showsHorizontalScrollIndicator={false}
             decelerationRate="normal"
             scrollEventThrottle={100}
-            snapToInterval={width - 60}
+            snapToInterval={width - 80}
             snapToAlignment="center"
-            data={mocks}
+            data={recommended}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) =>
               this.renderRecommendation(item, index)
@@ -212,12 +152,12 @@ class Home extends Component {
   };
 
   renderRecommendation = (item, index) => {
-    const isLastItem = index === mocks.length - 1;
+    const recommended = this.state.data.recommended;
+    const isLastItem = index === recommended.length - 1;
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.5}
-        onPress={this.props.onProductDetailScreen}
-        // style={[styles.shadow, { backgroundColor: 'red' }]}
+        onPress={() => this.props.onProductDetailScreen({ item })}
       >
         <View
           style={[
@@ -230,27 +170,15 @@ class Home extends Component {
           <View style={[styles.recommendationHeader, styles.shadow]}>
             <Image
               style={styles.recommendationImage}
-              source={{ uri: item.preview }}
+              source={{ uri: `${Config.baseUrl}${item.image_url[0].image}` }}
             />
           </View>
           <View style={[styles.bottomContainer, styles.shadow]}>
-            <Text style={styles.recommendationTitle}>{item.title} </Text>
+            <Text style={styles.recommendationTitle}>{item.name} </Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={styles.recommendlocation}>
-                Rs. {Number(item.price)}
+                Rs. {Number(item.price)} • 0.4 km from you
               </Text>
-              <View
-                style={{
-                  marginVertical: 6,
-                  marginLeft: 4,
-                  marginRight: 2,
-                  width: 4,
-                  height: 4,
-                  borderRadius: 6,
-                  backgroundColor: Color.black
-                }}
-              />
-              <Text style={styles.recommendlocation}> {item.location}</Text>
             </View>
             <View style={styles.recommendRating}>
               {this.renderRatings(item.rating)}
@@ -291,14 +219,14 @@ class Home extends Component {
           // snapToInterval={width - 40}
           snapToAlignment="center"
           style={{ overflow: "visible" }}
-          data={ENTRIES1}
-          keyExtractor={(item, index) => `${item.title}`}
+          data={this.state.data.top_rated}
+          keyExtractor={item => `${item.id}`}
           onScroll={Animated.event([
             { nativeEvent: { contentOffset: { x: this.scrollX } } }
           ])}
           renderItem={({ item }) => this.renderCarousel(item)}
         />
-        {this.renderDots()}
+        {this.state.data ? this.renderDots(this.state.data.top_rated) : null}
       </View>
     );
   };
@@ -306,23 +234,26 @@ class Home extends Component {
   renderCarousel = item => {
     console.log("inside render", item);
     return (
-      <TouchableWithoutFeedback style={[styles.shadow, { elevation: 4 }]}>
+      <TouchableWithoutFeedback
+        style={[styles.shadow, { elevation: 4 }]}
+        onPress={() => this.props.onProductDetailScreen({ item })}
+      >
         <View style={{ marginBottom: 35 }}>
           <Image
             style={styles.destination}
             imageStyle={{ borderRadius: 7 }}
             resizeMode="cover"
-            source={item.illustration}
+            source={{ uri: `${Config.baseUrl}${item.image_url[0].image}` }}
           />
           <View style={[styles.destinationInfo, styles.shadow]}>
             <Text style={{ color: Color.black, fontFamily: "Nunito-Black" }}>
-              {item.title}
+              {item.name}
             </Text>
             <View style={styles.carouselTextView}>
               <Text
                 style={{ color: Color.gray2, fontFamily: "Nunito-Regular" }}
               >
-                {item.subtitle.split("").slice(0, 50)}...
+                {item.description}
               </Text>
               <FontAwesome
                 name="chevron-right"
@@ -336,11 +267,12 @@ class Home extends Component {
     );
   };
 
-  renderDots() {
+  renderDots = item => {
     const dotPosition = Animated.divide(this.scrollX, width);
+    console.log("toprated", item);
     return (
       <View style={styles.dotsContainer}>
-        {mocks.map((item, index) => {
+        {item.map((item, index) => {
           const borderWidth = dotPosition.interpolate({
             inputRange: [index - 1, index, index + 1],
             outputRange: [0.4, 1, 0.4],
@@ -348,12 +280,7 @@ class Home extends Component {
           });
           return (
             <Animated.View
-              key={`step-${item.id}`}
-              // style={[
-              //   styles.dots,
-              //   //styles.activeDot,
-              //   { opacity: borderWidth }
-              // ]}
+              key={`step-${index}`}
               style={{
                 flex: 0,
                 backgroundColor: Color.secondary,
@@ -368,21 +295,26 @@ class Home extends Component {
         })}
       </View>
     );
-  }
+  };
 
   renderRecentlyAdded = () => {
+    const { recently_added } = this.state.data;
+    const recommended = recently_added;
     return (
       <View style={styles.recommendContainer}>
         <View style={styles.recommendedHeader}>
           <Text style={styles.recommendText}>Recently Added</Text>
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => this.props.onViewAllScreen({ recommended })}
+          >
             <Text style={styles.viewAllText}>View all</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "column" }}>
           <FlatList
             style={{ overflow: "visible" }}
-            data={mocks}
+            data={recently_added}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) =>
               this.renderRecentlyAddedItems(item, index)
@@ -395,75 +327,76 @@ class Home extends Component {
 
   renderRecentlyAddedItems = (item, index) => {
     return (
-      <View
-        style={[
-          styles.shadow,
-          {
-            flexDirection: "row",
-            backgroundColor: "#fff",
-            padding: 15,
-            //marginHorizontal: 20,
-            marginLeft: 32,
-            marginRight: 32,
-            marginVertical: 6,
-            borderRadius: 12,
-            flex: 1
-          }
-        ]}
+      <TouchableWithoutFeedback
+        onPress={() => this.props.onProductDetailScreen({ item })}
       >
         <View
-          style={{
-            flex: 0.3,
-            //backgroundColor: 'blue',
-            paddingRight: Platform.OS === "ios" ? 14 : 0
-          }}
-        >
-          <Image
-            style={{ width: 85, height: 85, borderRadius: 6 }}
-            source={{ uri: item.preview }}
-          />
-        </View>
-        <View
-          style={{
-            flex: 0.7,
-            flexDirection: "column"
-            //backgroundColor: 'red'
-          }}
+          style={[
+            styles.shadow,
+            {
+              flexDirection: "row",
+              backgroundColor: "#fff",
+              padding: 15,
+              marginLeft: 32,
+              marginRight: 32,
+              marginVertical: 6,
+              borderRadius: 12,
+              flex: 1
+            }
+          ]}
         >
           <View
-            style={{ justifyContent: "space-between", flexDirection: "row" }}
-          >
-            <Text
-              style={{
-                color: Color.black,
-                fontSize: 16,
-                fontFamily: "Nunito-Bold"
-              }}
-            >
-              {item.title}
-            </Text>
-            <Text
-              style={{
-                color: Color.secondary,
-                fontFamily: "Nunito-Bold",
-                marginRight: 10
-              }}
-            >
-              Rs. {Number(item.price).toFixed(2)}
-            </Text>
-          </View>
-          <Text
             style={{
-              color: Color.gray2,
-              fontFamily: "Nunito-Regular",
-              fontSize: 12,
-              marginVertical: 5
+              flex: 0.3,
+              paddingRight: Platform.OS === "ios" ? 14 : 0
             }}
           >
-            {item.description}
-          </Text>
+            <Image
+              style={{ width: 85, height: 85, borderRadius: 6 }}
+              source={{ uri: `${Config.baseUrl}${item.image_url[0].image}` }}
+            />
+          </View>
+          <View
+            style={{
+              flex: 0.7,
+              flexDirection: "column"
+            }}
+          >
+            <View
+              style={{ justifyContent: "space-between", flexDirection: "row" }}
+            >
+              <Text
+                style={{
+                  color: Color.black,
+                  fontSize: 16,
+                  fontFamily: "Nunito-Bold"
+                }}
+              >
+                {item.name}
+              </Text>
+              <Text
+                style={{
+                  color: Color.secondary,
+                  fontFamily: "Nunito-Bold",
+                  marginRight: 10
+                }}
+              >
+                Rs. {Number(item.price).toFixed(2)}
+              </Text>
+            </View>
+            <Text
+              style={{
+                color: Color.gray2,
+                fontFamily: "Nunito-Regular",
+                fontSize: 12,
+                marginVertical: 5
+              }}
+            >
+              {item.description}
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   };
 
@@ -493,6 +426,11 @@ class Home extends Component {
         >
           Couldn't get your current location
         </Snackbar>
+        <LoadingSpinnerOverlay
+          ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
+        >
+          {this._renderActivityIndicator()}
+        </LoadingSpinnerOverlay>
       </ScrollView>
     );
   }

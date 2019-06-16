@@ -5,7 +5,8 @@ import CustomButton from "./CustomButton";
 import CustomHeader from "./CustomHeader";
 import ScrollableView from "./ScrollableView";
 import ScrollableTabView from "./ScrollableTabView";
-import LoadingSpinnerOverlay from "./LoadingSpinnerOverlay"
+import LoadingSpinnerOverlay from "./LoadingSpinnerOverlay";
+import EmptyCart from "./EmptyCart";
 
 export {
   PasswordInputText,
@@ -15,5 +16,6 @@ export {
   CustomHeader,
   ScrollableView,
   ScrollableTabView,
-  LoadingSpinnerOverlay
+  LoadingSpinnerOverlay,
+  EmptyCart
 };

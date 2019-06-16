@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Color, Images } from "common_f";
+import { Color, Images, Config } from "common_f";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 class EditProfile extends Component {
+  onLogoutPress = () => {
+    AsyncStorage.removeItem("token").then(() => {
+      this.props.onLogoutPress();
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -120,7 +127,7 @@ class EditProfile extends Component {
 
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={this.props.onLogoutPress}
+          onPress={() => this.onLogoutPress()}
         >
           <View style={{ backgroundColor: "white", marginTop: 30 }}>
             <View style={[styles.row, styles.logout]}>

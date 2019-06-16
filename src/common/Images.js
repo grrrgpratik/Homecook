@@ -13,13 +13,16 @@ const Images = {
   IconMap: require("images_f/icons/maps_icon.png"),
   Profile: require("images_f/profile.jpg"),
 
-
+  SplashScreen: require("images_f/splash_screen.png"),
   AlooDum: require("images_f/aloo-dum.png"),
   BiryaniChicken: require("images_f/Biryani-chicken.png"),
   BuffSamayaBaji: require("images_f/Buff-Samaya-Baji.png"),
   ChickenCurryRice: require("images_f/chicken-curry-rice.png"),
   ChickenMomo: require("images_f/chicken-momo.png"),
   Sandwich: require("images_f/veg-sandwich.png"),
+  ForgetPassword: require("images_f/forget_password.png"),
+  EmailSend: require("images_f/email_sent.png"),
+  EmptyCart: require("images_f/Artboard.png")
 };
 
 export default Images;
