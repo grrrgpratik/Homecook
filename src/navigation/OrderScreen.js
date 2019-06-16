@@ -6,5 +6,4 @@ class OrderScreen extends Component {
   render() {
     return <Order />;
   }
-}
-export default OrderScreen;
+}export default OrderScreen;

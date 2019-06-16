@@ -9,8 +9,12 @@ import {
   FlatList,
   ScrollView
 } from 'react-native';
-import { Color } from 'common_f';
+import { Color,Config } from 'common_f';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import fetch from "react-native-fetch-polyfill";
+
+import { toast } from "app_f/Omni";
 
 const mocks = [
   {
@@ -104,6 +108,15 @@ const mocks = [
 ];
 
 class Search extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchText:""
+    };
+  }
+
+
   renderRecentlyAdded = () => {
     return (
       <View style={styles.recommendContainer}>
@@ -193,6 +206,28 @@ class Search extends Component {
     );
   };
 
+  handleSearch = () =>{
+    
+    
+    const fetchOptions={
+      method:"GET",
+      headers : {"Content-Type" : "application/json"},
+      timeout: 10000
+    };
+    console.log(fetchOptions)
+    const url = Config.SearchUrl + `?search=${this.state.searchText}`;
+    console.log(url)
+    fetch(url,fetchOptions)
+    .then((response)=>response.json())  
+    .then((responseJSON)=>{
+      
+      console.log(responseJSON)
+      
+    })
+    
+    
+  }
+
   render() {
     return (
       <ScrollView
@@ -207,11 +242,12 @@ class Search extends Component {
             color={Color.gray}
           />
           <TextInput
-            //defaultValue={email}
-            onChangeText={text => this.setState({ email: text })}
+            defaultValue={this.state.searchText}
+            onChangeText={text => this.setState({ searchText: text })}
             style={styles.input}
             placeholder='Search Homemade food'
             placeholderTextColor={Color.gray}
+            onEndEditing={()=>this.handleSearch()}
             //keyboardType={"email-address"}
           />
         </View>

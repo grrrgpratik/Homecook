@@ -9,13 +9,16 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  KeyboardAvoidingView
+  ActivityIndicator,
+  ProgressBarAndroid,
+  ActivityIndicatorIOS
 } from "react-native";
-import { Color, Images} from "common_f";
-import{CustomButton} from "component_f";
+import { Color, Images, Config} from "common_f";
+import{CustomButton, LoadingSpinnerOverlay} from "component_f";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
-
+import fetch from "react-native-fetch-polyfill";
+import { toast } from "app_f/Omni";
 const { height, width } = Dimensions.get("window");
 
 class ForgetPasswordScreen extends Component {
@@ -39,9 +42,63 @@ class ForgetPasswordScreen extends Component {
       //mode: "modal"
     };
   };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      
+    };
+  }
+
+  
+  _renderActivityIndicator() {
+    return ActivityIndicator ? (
+      <ActivityIndicator
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    ) : Platform.OS == "android" ? (
+      <ProgressBarAndroid color={Color.secondary} styleAttr={"small"} />
+    ) : (
+      <ActivityIndicatorIOS
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    );
+  }
+
+  handleForgetPassword(){
+    this._modal_2_LoadingSpinnerOverLay.show();
+    const fetchOptions={
+      method:"POST",
+      headers : {"Content-Type" : "application/json"},
+      body: JSON.stringify({
+        email:this.state.email,
+        
+      }),
+      timeout: 10000
+    };
+    console.log(fetchOptions)
+    const url = Config.passwordresetUrl;
+    console.log(url)
+    fetch(url,fetchOptions)
+    .then((response)=>response.json())  
+    .then((responseJSON)=>{
+      this._modal_2_LoadingSpinnerOverLay.hide();
+      console.log(responseJSON)
+      toast(responseJSON.message)
+    })
+    .catch(err=>{
+      this._modal_2_LoadingSpinnerOverLay.hide();
+      console.log(err)})
+  }
   render() {
+    
     return (
-      <ScrollView keyboardShouldPersistTaps="always"  >
+      <ScrollView keyboardShouldPersistTaps="always">
       <View style={styles.container}>
         <Image
           source={Images.ForgetPassword}
@@ -80,7 +137,8 @@ class ForgetPasswordScreen extends Component {
           </Text>
           <TextInput
                 style={[styles.input]}
-               
+                defaultValue={this.state.email}
+                onChangeText={text => this.setState({ email: text })}
                 placeholder="Enter your email"
                 placeholderTextColor={Color.gray}
                 
@@ -91,10 +149,14 @@ class ForgetPasswordScreen extends Component {
           <View style={{ paddingHorizontal : 35, paddingBottom: 80}} > 
               <CustomButton
               buttonText={"RECOVER PASSWORD"}
-              onButtonPress={() => this.handleLogin()}
+              onButtonPress={() => this.handleForgetPassword() }
             />     
             </View>
-
+            <LoadingSpinnerOverlay
+            ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
+          >
+            {this._renderActivityIndicator()}
+          </LoadingSpinnerOverlay>
       </ScrollView>
     );
   }

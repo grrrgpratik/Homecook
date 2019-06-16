@@ -1,14 +1,20 @@
-const baseUrl = "http://192.168.100.100:8000";
+const baseUrl = "http://192.168.1.83:8000";
 
 const loginUrl = baseUrl + "/api/accounts/login/";
 
 const signUpUrl = baseUrl + "/api/accounts/signup/";
 
-const homeUrl = baseUrl + "/api/models/home";
+const homeUrl = baseUrl + "/api/models/home/";
+
+ const passwordresetUrl = baseUrl + "/api/accounts/password/reset/";
+
+ const SearchUrl = baseUrl + "/api/models/Product/"
 
 export default {
   baseUrl,
   loginUrl,
   signUpUrl,
-  homeUrl
+  homeUrl,
+  passwordresetUrl,
+  SearchUrl
 };
