@@ -394,6 +394,37 @@ class Home extends Component {
             >
               {item.description}
             </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 3
+              }}
+            >
+              <Text
+                style={{
+                  color: Color.black,
+                  fontFamily: "Nunito-Regular",
+                  fontSize: 12,
+                  textAlign: "left"
+                }}
+              >
+                Chef: {item.owner.full_name}
+              </Text>
+              <Text
+                style={{
+                  color: "#fff",
+                  fontFamily: "Nunito-Bold",
+                  backgroundColor: Color.secondary,
+                  elevation: 2,
+                  borderRadius: 6,
+                  padding: 5,
+                  textAlign: "right"
+                }}
+              >
+                Add to Cart
+              </Text>
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>

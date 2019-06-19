@@ -13,8 +13,8 @@ import {
   ProgressBarAndroid,
   ActivityIndicatorIOS
 } from "react-native";
-import { Color, Images, Config} from "common_f";
-import{CustomButton, LoadingSpinnerOverlay} from "component_f";
+import { Color, Images, Config } from "common_f";
+import { CustomButton, LoadingSpinnerOverlay } from "component_f";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 import fetch from "react-native-fetch-polyfill";
@@ -46,12 +46,10 @@ class ForgetPasswordScreen extends Component {
     super(props);
 
     this.state = {
-      email: "",
-      
+      email: ""
     };
   }
 
-  
   _renderActivityIndicator() {
     return ActivityIndicator ? (
       <ActivityIndicator
@@ -70,93 +68,90 @@ class ForgetPasswordScreen extends Component {
     );
   }
 
-  handleForgetPassword(){
+  handleForgetPassword() {
     this._modal_2_LoadingSpinnerOverLay.show();
-    const fetchOptions={
-      method:"POST",
-      headers : {"Content-Type" : "application/json"},
+    const fetchOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email:this.state.email,
-        
+        email: this.state.email
       }),
       timeout: 10000
     };
-    console.log(fetchOptions)
+    console.log(fetchOptions);
     const url = Config.passwordresetUrl;
-    console.log(url)
-    fetch(url,fetchOptions)
-    .then((response)=>response.json())  
-    .then((responseJSON)=>{
-      this._modal_2_LoadingSpinnerOverLay.hide();
-      console.log(responseJSON)
-      toast(responseJSON.message)
-    })
-    .catch(err=>{
-      this._modal_2_LoadingSpinnerOverLay.hide();
-      console.log(err)})
+    console.log(url);
+    fetch(url, fetchOptions)
+      .then(response => response.json())
+      .then(responseJSON => {
+        this._modal_2_LoadingSpinnerOverLay.hide();
+        console.log(responseJSON);
+        toast(responseJSON.message);
+      })
+      .catch(err => {
+        this._modal_2_LoadingSpinnerOverLay.hide();
+        console.log(err);
+      });
   }
   render() {
-    
     return (
       <ScrollView keyboardShouldPersistTaps="always">
-      <View style={styles.container}>
-        <Image
-          source={Images.ForgetPassword}
-          style={{ width: width, height: height/2, marginTop: 30 }}
-        />
-        <View
-          style={{
-        //    marginTop: 50,
-            flex: 1,
-            alignItems: "center",
-            paddingHorizontal: 30
-          }}
+        <View style={styles.container}>
+          <Image
+            source={Images.ForgetPassword}
+            style={{ width: width, height: height / 2, marginTop: 30 }}
+          />
+          <View
+            style={{
+              //    marginTop: 50,
+              flex: 1,
+              alignItems: "center",
+              paddingHorizontal: 30
+            }}
+          >
+            <Text
+              style={{
+                color: "black",
+                fontSize: 24,
+                //fontWeight: "bold",
+                fontFamily: "Nunito-Black",
+                marginBottom: 15
+                //  marginTop:20
+              }}
+            >
+              Forgot Password ?
+            </Text>
+            <Text
+              style={{
+                color: "black",
+                textAlign: "center",
+                fontSize: 16,
+                fontFamily: "Nunito-Regular"
+              }}
+            >
+              Enter your registered email to receive instructions on how to
+              reset your password.
+            </Text>
+            <TextInput
+              style={[styles.input]}
+              defaultValue={this.state.email}
+              onChangeText={text => this.setState({ email: text })}
+              placeholder="Enter your email"
+              placeholderTextColor={Color.gray}
+            />
+          </View>
+        </View>
+        <View style={{ paddingHorizontal: 35, paddingBottom: 80 }}>
+          <CustomButton
+            buttonText={"RECOVER PASSWORD"}
+            onButtonPress={() => this.handleForgetPassword()}
+          />
+        </View>
+        <LoadingSpinnerOverlay
+          ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
         >
-          <Text
-            style={{
-              color: "black",
-              fontSize: 24,
-              //fontWeight: "bold",
-              fontFamily: "Nunito-Black",
-              marginBottom: 15,
-            //  marginTop:20
-            }}
-          >
-            Forgot Password ?
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              textAlign: "center",
-              fontSize: 16,
-              fontFamily: "Nunito-Regular"
-            }}
-          >
-            Enter your registered email to receive instructions on how to reset
-            your password.
-          </Text>
-          <TextInput
-                style={[styles.input]}
-                defaultValue={this.state.email}
-                onChangeText={text => this.setState({ email: text })}
-                placeholder="Enter your email"
-                placeholderTextColor={Color.gray}
-                
-              />  
-              
-          </View>
-          </View>
-          <View style={{ paddingHorizontal : 35, paddingBottom: 80}} > 
-              <CustomButton
-              buttonText={"RECOVER PASSWORD"}
-              onButtonPress={() => this.handleForgetPassword() }
-            />     
-            </View>
-            <LoadingSpinnerOverlay
-            ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
-          >
-            {this._renderActivityIndicator()}
-          </LoadingSpinnerOverlay>
+          {this._renderActivityIndicator()}
+        </LoadingSpinnerOverlay>
       </ScrollView>
     );
   }
@@ -191,14 +186,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start"
   },
-  input: { 
+  input: {
     marginTop: 40,
     marginBottom: 10,
-    width:340,
+    width: 340,
     backgroundColor: "#F9FAFF",
     color: Color.gray,
     backgroundColor: "#F9FAFF",
     fontFamily: "Nunito-Regular",
     borderRadius: 5
-  },
+  }
 });
