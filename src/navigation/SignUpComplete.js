@@ -1,18 +1,4 @@
-<<<<<<< HEAD
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-
-export default class SignUpCompleteScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    );
-  }
-}
-=======
-import React, { Component } from "react";
 import {
   View,
   Text,
@@ -21,16 +7,15 @@ import {
   Dimensions,
   Platform,
   TouchableOpacity,
-  
   ScrollView,
   KeyboardAvoidingView
-} from "react-native";
-import { Color, Images} from "common_f";
-import{CustomButton} from "component_f";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Feather from "react-native-vector-icons/Feather";
+} from 'react-native';
+import { Color, Images } from 'common_f';
+import { CustomButton } from 'component_f';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/Feather';
 
-const { height, width } = Dimensions.get("window");
+const { height, width } = Dimensions.get('window');
 
 class SignUpCompleteScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -42,8 +27,8 @@ class SignUpCompleteScreen extends Component {
             onPress={() => navigation.goBack()}
           >
             <MaterialCommunityIcons
-              name="chevron-left"
-              color={"black"}
+              name='chevron-left'
+              color={'black'}
               size={30}
             />
           </TouchableOpacity>
@@ -55,53 +40,50 @@ class SignUpCompleteScreen extends Component {
   };
   render() {
     return (
-      <ScrollView keyboardShouldPersistTaps="always"  >
-      <View style={styles.container}>
-        <Image
-          source={Images.EmailSend}
-          style={{ width: width, height: height/2, marginTop: 30 }}
-        />
-        <View
-          style={{
-        //    marginTop: 50,
-            flex: 1,
-            alignItems: "center",
-            paddingHorizontal: 30
-          }}
-        >
-          <Text
+      <ScrollView keyboardShouldPersistTaps='always'>
+        <View style={styles.container}>
+          <Image
+            source={Images.EmailSend}
+            style={{ width: width, height: height / 2, marginTop: 30 }}
+          />
+          <View
             style={{
-              color: "black",
-              fontSize: 24,
-              //fontWeight: "bold",
-              fontFamily: "Nunito-Black",
-              marginBottom: 15,
-            //  marginTop:20
+              //    marginTop: 50,
+              flex: 1,
+              alignItems: 'center',
+              paddingHorizontal: 30
             }}
           >
-            Check your email
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              textAlign: "center",
-              fontSize: 16,
-              fontFamily: "Nunito-Regular"
-            }}
-          >
-            We've sent instructions on how to reset your password.
-          </Text>
-          
-              
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 24,
+                //fontWeight: "bold",
+                fontFamily: 'Nunito-Black',
+                marginBottom: 15
+                //  marginTop:20
+              }}
+            >
+              Check your email
+            </Text>
+            <Text
+              style={{
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 16,
+                fontFamily: 'Nunito-Regular'
+              }}
+            >
+              We've sent instructions on how to reset your password.
+            </Text>
           </View>
-          </View>
-          <View style={{ paddingHorizontal : 35, paddingTop: 80}} > 
-              <CustomButton
-              buttonText={"GO TO EMAIL"}
-              onButtonPress={() => this.handleLogin()}
-            />     
-            </View>
-
+        </View>
+        <View style={{ paddingHorizontal: 35, paddingTop: 80 }}>
+          <CustomButton
+            buttonText={'GO TO EMAIL'}
+            onButtonPress={() => this.handleLogin()}
+          />
+        </View>
       </ScrollView>
     );
   }
@@ -111,32 +93,29 @@ export default SignUpCompleteScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: 'center'
     //justifyContent: "center"
   },
   row: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   header: {
-    backgroundColor: "transparent",
-    justifyContent: "space-between",
-    alignItems: "center",
+    backgroundColor: 'transparent',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     zIndex: 100,
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     borderBottomWidth: 0,
     padding: 36,
-    marginTop: Platform.OS === "ios" ? 14 : 0
+    marginTop: Platform.OS === 'ios' ? 14 : 0
   },
   back: {
     width: 16 * 3,
     height: 16 * 3,
-    justifyContent: "center",
-    alignItems: "flex-start"
+    justifyContent: 'center',
+    alignItems: 'flex-start'
   }
-  
-  
 });
->>>>>>> 5c731c6ff548db3072c04f0d1cfe9555d5cb9758
