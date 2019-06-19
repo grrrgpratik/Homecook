@@ -67,6 +67,7 @@ class Login extends Component {
           response.json().then(responseJSON => {
             console.log(responseJSON);
             this.onValueChange("token", responseJSON.token);
+            this.onValueChange("user", JSON.stringify(responseJSON.user));
             this._modal_2_LoadingSpinnerOverLay.hide();
             onLoginPress();
           });

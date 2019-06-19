@@ -8,7 +8,7 @@ import _Map from "./Map";
 import _ProductDetail from "./ProductDetail";
 import _UserProfile from "./UserProfile";
 import _EditProfile from "./EditProfile";
-import _SaveProfile from "./SaveProfile";
+
 import _Search from "./Search";
 import _Cart from "./Cart";
 import _ViewAll from "./ViewAll";
@@ -18,7 +18,7 @@ export const Order = _Order;
 export const ViewAll = _ViewAll;
 export const Cart = _Cart;
 export const Search = _Search;
-export const SaveProfile = _SaveProfile;
+
 export const EditProfile = _EditProfile;
 export const UserProfile = _UserProfile;
 export const ProductDetail = _ProductDetail;

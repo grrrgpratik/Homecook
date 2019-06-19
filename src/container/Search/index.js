@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   TextInput,
@@ -7,11 +7,14 @@ import {
   Platform,
   Image,
   FlatList,
-  ScrollView
-} from 'react-native';
-import { Color,Config } from 'common_f';
-import Icon from 'react-native-vector-icons/Ionicons';
-
+  ScrollView,
+  ActivityIndicator,
+  ProgressBarAndroid,
+  ActivityIndicatorIOS
+} from "react-native";
+import { Color, Config } from "common_f";
+import Icon from "react-native-vector-icons/Ionicons";
+import { LoadingSpinnerOverlay } from "component_f";
 import fetch from "react-native-fetch-polyfill";
 
 import { toast } from "app_f/Omni";
@@ -20,89 +23,89 @@ const mocks = [
   {
     id: 1,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: true,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Santorini',
+    title: "Santorini",
     description:
-      'Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC',
+      "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC",
     rating: 4.3,
     price: 224.0,
     reviews: 3212,
     preview:
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 2,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: false,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Loutraki',
-    description: 'This attractive small town, 80 kilometers from Athens',
+    title: "Loutraki",
+    description: "This attractive small town, 80 kilometers from Athens",
     rating: 4.6,
     reviews: 3212,
     price: 122.0,
     preview:
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 3,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: true,
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Santorini',
-    description: 'Santorini - Description',
+    title: "Santorini",
+    description: "Santorini - Description",
     rating: 3.2,
     reviews: 3212,
     price: 432.0,
     preview:
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
     id: 4,
     user: {
-      name: 'Lelia Chavez',
-      avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+      name: "Lelia Chavez",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
-    location: '0.4 Km from you',
+    location: "0.4 Km from you",
     temperature: 34,
-    title: 'Loutraki',
-    description: 'This attractive small town, 80 kilometers from Athens',
+    title: "Loutraki",
+    description: "This attractive small town, 80 kilometers from Athens",
     rating: 5,
     reviews: 3212,
     price: 400.0,
     preview:
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
     images: [
-      'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80'
+      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
     ]
   }
 ];
@@ -112,10 +115,10 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      searchText:""
+      searchText: "",
+      searchResult: []
     };
   }
-
 
   renderRecentlyAdded = () => {
     return (
@@ -123,9 +126,9 @@ class Search extends Component {
         <View style={styles.recommendedHeader}>
           <Text style={styles.recommendText}>Recommended for you</Text>
         </View>
-        <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: "column" }}>
           <FlatList
-            style={{ overflow: 'visible' }}
+            style={{ overflow: "visible" }}
             data={mocks}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) =>
@@ -143,8 +146,8 @@ class Search extends Component {
         style={[
           styles.shadow,
           {
-            flexDirection: 'row',
-            backgroundColor: '#fff',
+            flexDirection: "row",
+            backgroundColor: "#fff",
             padding: 15,
             //marginHorizontal: 20,
             marginLeft: 32,
@@ -156,7 +159,7 @@ class Search extends Component {
         ]}
       >
         <View
-          style={{ flex: 0.3, paddingRight: Platform.OS === 'ios' ? 14 : 0 }}
+          style={{ flex: 0.3, paddingRight: Platform.OS === "ios" ? 14 : 0 }}
         >
           <Image
             style={{ width: 85, height: 85, borderRadius: 6 }}
@@ -166,17 +169,17 @@ class Search extends Component {
         <View
           style={{
             flex: 0.7,
-            flexDirection: 'column'
+            flexDirection: "column"
           }}
         >
           <View
-            style={{ justifyContent: 'space-between', flexDirection: 'row' }}
+            style={{ justifyContent: "space-between", flexDirection: "row" }}
           >
             <Text
               style={{
                 color: Color.black,
                 fontSize: 16,
-                fontFamily: 'Nunito-Bold'
+                fontFamily: "Nunito-Bold"
               }}
             >
               {item.title}
@@ -184,7 +187,7 @@ class Search extends Component {
             <Text
               style={{
                 color: Color.secondary,
-                fontFamily: 'Nunito-Bold',
+                fontFamily: "Nunito-Bold",
                 marginRight: 10
               }}
             >
@@ -194,7 +197,7 @@ class Search extends Component {
           <Text
             style={{
               color: Color.gray2,
-              fontFamily: 'Nunito-Regular',
+              fontFamily: "Nunito-Regular",
               fontSize: 12,
               marginVertical: 5
             }}
@@ -206,26 +209,114 @@ class Search extends Component {
     );
   };
 
-  handleSearch = () =>{
-    
-    
-    const fetchOptions={
-      method:"GET",
-      headers : {"Content-Type" : "application/json"},
+  handleSearchResult(item, index) {
+    return (
+      <View
+        style={[
+          styles.shadow,
+          {
+            flexDirection: "row",
+            backgroundColor: "#fff",
+            padding: 15,
+            //marginHorizontal: 20,
+            marginLeft: 32,
+            marginRight: 32,
+            marginVertical: 6,
+            borderRadius: 12,
+            flex: 1
+          }
+        ]}
+      >
+        <View
+          style={{ flex: 0.3, paddingRight: Platform.OS === "ios" ? 14 : 0 }}
+        >
+          <Image
+            style={{ width: 85, height: 85, borderRadius: 6 }}
+            source={{ uri: item.image_url[0].image }}
+          />
+        </View>
+        <View
+          style={{
+            flex: 0.7,
+            flexDirection: "column"
+          }}
+        >
+          <View
+            style={{ justifyContent: "space-between", flexDirection: "row" }}
+          >
+            <Text
+              style={{
+                color: Color.black,
+                fontSize: 16,
+                fontFamily: "Nunito-Bold"
+              }}
+            >
+              {item.name}
+            </Text>
+            <Text
+              style={{
+                color: Color.secondary,
+                fontFamily: "Nunito-Bold",
+                marginRight: 10
+              }}
+            >
+              Rs. {Number(item.price).toFixed(2)}
+            </Text>
+          </View>
+          <Text
+            style={{
+              color: Color.gray2,
+              fontFamily: "Nunito-Regular",
+              fontSize: 12,
+              marginVertical: 5
+            }}
+          >
+            {item.description}
+          </Text>
+        </View>
+      </View>
+    );
+  }
+
+  handleSearch = () => {
+    this._modal_2_LoadingSpinnerOverLay.show();
+    const fetchOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
       timeout: 10000
     };
-    console.log(fetchOptions)
+    console.log(fetchOptions);
     const url = Config.SearchUrl + `?search=${this.state.searchText}`;
-    console.log(url)
-    fetch(url,fetchOptions)
-    .then((response)=>response.json())  
-    .then((responseJSON)=>{
-      
-      console.log(responseJSON)
-      
-    })
-    
-    
+    console.log(url);
+    fetch(url, fetchOptions)
+      .then(response => response.json())
+      .then(responseJSON => {
+        console.log(responseJSON);
+        this.setState({ searchResult: responseJSON });
+        this._modal_2_LoadingSpinnerOverLay.hide();
+      })
+      .catch(err => {
+        this._modal_2_LoadingSpinnerOverLay.hide();
+        console.log(err);
+      });
+  };
+
+  _renderActivityIndicator() {
+    return ActivityIndicator ? (
+      <ActivityIndicator
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    ) : Platform.OS == "android" ? (
+      <ProgressBarAndroid color={Color.secondary} styleAttr={"small"} />
+    ) : (
+      <ActivityIndicatorIOS
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    );
   }
 
   render() {
@@ -237,7 +328,7 @@ class Search extends Component {
         <View style={styles.searchSection}>
           <Icon
             style={styles.searchIcon}
-            name='ios-search'
+            name="ios-search"
             size={20}
             color={Color.gray}
           />
@@ -245,9 +336,9 @@ class Search extends Component {
             defaultValue={this.state.searchText}
             onChangeText={text => this.setState({ searchText: text })}
             style={styles.input}
-            placeholder='Search Homemade food'
+            placeholder="Search Homemade food"
             placeholderTextColor={Color.gray}
-            onEndEditing={()=>this.handleSearch()}
+            onEndEditing={() => this.handleSearch()}
             //keyboardType={"email-address"}
           />
         </View>
@@ -257,7 +348,120 @@ class Search extends Component {
         <Text style={styles.recentText}>Momo</Text>
         <Text style={styles.recentText}>Chicken Burger</Text>
 
-        {this.renderRecentlyAdded()}
+        {this.state.searchResult.length > 0 ? null : this.renderRecentlyAdded()}
+
+        {this.state.searchResult.map((item, index) => {
+          return (
+            <View
+              key={item.id}
+              style={[
+                styles.shadow,
+                {
+                  flexDirection: "row",
+                  backgroundColor: "#fff",
+                  padding: 15,
+                  //marginHorizontal: 20,
+                  marginLeft: 32,
+                  marginRight: 32,
+                  marginVertical: 6,
+                  borderRadius: 12,
+                  flex: 1
+                }
+              ]}
+            >
+              <View
+                style={{
+                  flex: 0.3,
+                  paddingRight: Platform.OS === "ios" ? 14 : 0
+                }}
+              >
+                <Image
+                  style={{ width: 85, height: 85, borderRadius: 6 }}
+                  source={{ uri: item.image_url[0].image }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 0.7,
+                  flexDirection: "column"
+                }}
+              >
+                <View
+                  style={{
+                    justifyContent: "space-between",
+                    flexDirection: "row"
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: Color.black,
+                      fontSize: 16,
+                      fontFamily: "Nunito-Bold"
+                    }}
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    style={{
+                      color: Color.secondary,
+                      fontFamily: "Nunito-Bold",
+                      marginRight: 10
+                    }}
+                  >
+                    Rs. {Number(item.price).toFixed(2)}
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    color: Color.gray2,
+                    fontFamily: "Nunito-Regular",
+                    fontSize: 12,
+                    marginVertical: 5
+                  }}
+                >
+                  {item.description}
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 3
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: Color.black,
+                      fontFamily: "Nunito-Regular",
+                      fontSize: 12,
+                      textAlign: "left"
+                    }}
+                  >
+                    Chef: {item.owner.full_name}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontFamily: "Nunito-Bold",
+                      backgroundColor: Color.secondary,
+                      elevation: 2,
+                      borderRadius: 6,
+                      padding: 5,
+                      textAlign: "right"
+                    }}
+                  >
+                    Add to Cart
+                  </Text>
+                </View>
+              </View>
+            </View>
+          );
+        })}
+
+        <LoadingSpinnerOverlay
+          ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
+        >
+          {this._renderActivityIndicator()}
+        </LoadingSpinnerOverlay>
       </ScrollView>
     );
   }
@@ -270,13 +474,13 @@ const styles = StyleSheet.create({
   },
 
   searchSection: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F9FAFF',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F9FAFF",
     margin: 32,
     borderRadius: 22,
-    paddingTop: Platform.OS === 'ios' ? 14 : 0
+    paddingTop: Platform.OS === "ios" ? 14 : 0
   },
   searchIcon: {
     padding: 12
@@ -287,42 +491,42 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
-    backgroundColor: '#F9FAFF',
+    backgroundColor: "#F9FAFF",
     color: Color.gray,
-    backgroundColor: '#F9FAFF',
-    fontFamily: 'Nunito-Regular',
+    backgroundColor: "#F9FAFF",
+    fontFamily: "Nunito-Regular",
     borderRadius: 22
   },
   recentSearchText: {
     color: Color.black,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: "Nunito-Bold",
     paddingHorizontal: 34,
     paddingBottom: 10,
     fontSize: 20
   },
   recentText: {
     color: Color.gray,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: "Nunito-Regular",
     paddingHorizontal: 34,
     paddingBottom: 10,
     fontSize: 16
   },
-  recommendContainer: { flex: 1, flexDirection: 'column', paddingTop: 7 },
+  recommendContainer: { flex: 1, flexDirection: "column", paddingTop: 7 },
   recommendedHeader: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     paddingHorizontal: 36,
     paddingVertical: 20,
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   recommendText: {
     fontSize: 14 * 1.4,
     color: Color.black,
-    fontFamily: 'Nunito-Black'
+    fontFamily: "Nunito-Black"
   },
-  viewAllText: { color: Color.gray2, fontFamily: 'Nunito-Regular' },
+  viewAllText: { color: Color.gray2, fontFamily: "Nunito-Regular" },
   shadow: {
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOffset: {
       width: 0,
       height: 6

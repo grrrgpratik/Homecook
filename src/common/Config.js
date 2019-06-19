@@ -10,11 +10,14 @@ const passwordresetUrl = baseUrl + '/api/accounts/password/reset/';
 
 const SearchUrl = baseUrl + '/api/models/Product/';
 
+const editProfileUrl = baseUrl + '/api/models/edit-profile/';
+
 export default {
   baseUrl,
   loginUrl,
   signUpUrl,
   homeUrl,
   passwordresetUrl,
-  SearchUrl
+  SearchUrl,
+  editProfileUrl
 };
