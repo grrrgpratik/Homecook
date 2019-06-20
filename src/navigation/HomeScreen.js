@@ -14,6 +14,7 @@ class HomeScreen extends PureComponent {
         onProductDetailScreen={product => navigate("Product", { product })}
         onEditProfileScreen={() => navigate("EditProfile")}
         onViewAllScreen={product => navigate("ViewAll", { product })}
+        onCartScreen={() => navigate("Cart")}
       />
     );
   }

@@ -411,24 +411,67 @@ class Home extends Component {
               >
                 Chef: {item.owner.full_name}
               </Text>
-              <Text
-                style={{
-                  color: "#fff",
-                  fontFamily: "Nunito-Bold",
-                  backgroundColor: Color.secondary,
-                  elevation: 2,
-                  borderRadius: 6,
-                  padding: 5,
-                  textAlign: "right"
-                }}
-              >
-                Add to Cart
-              </Text>
+              <TouchableWithoutFeedback onPress={() => this.addToCart(item.id)}>
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontFamily: "Nunito-Bold",
+                    backgroundColor: Color.secondary,
+                    elevation: 2,
+                    borderRadius: 6,
+                    padding: 5,
+                    textAlign: "right"
+                  }}
+                >
+                  Add to Cart
+                </Text>
+              </TouchableWithoutFeedback>
             </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
     );
+  };
+
+  addToCart = id => {
+    console.log(id);
+    this._modal_2_LoadingSpinnerOverLay.show();
+    AsyncStorage.getItem("token").then(token => {
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`
+        },
+        body: JSON.stringify({
+          items: id,
+          quantity: 1,
+          ordered: false
+        }),
+        timeout: 10000
+      };
+      console.log(fetchOptions);
+      fetch(Config.addToCartUrl, fetchOptions)
+        .then(response => {
+          if (response.status === 201) {
+            response.json().then(responseJSON => {
+              console.log(responseJSON);
+              this._modal_2_LoadingSpinnerOverLay.hide();
+              this.props.onCartScreen();
+            });
+          } else {
+            response.json().then(responseJSON => {
+              this._modal_2_LoadingSpinnerOverLay.hide();
+              toast(responseJSON.message);
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this._modal_2_LoadingSpinnerOverLay.hide();
+          toast("Network request failed");
+        });
+    });
   };
 
   render() {

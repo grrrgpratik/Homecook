@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-
-export default class SignUpCompleteScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    );
-  }
-}
-=======
 import React, { Component } from "react";
 import {
   View,
@@ -21,12 +7,11 @@ import {
   Dimensions,
   Platform,
   TouchableOpacity,
-  
   ScrollView,
   KeyboardAvoidingView
 } from "react-native";
-import { Color, Images} from "common_f";
-import{CustomButton} from "component_f";
+import { Color, Images } from "common_f";
+import { CustomButton } from "component_f";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 
@@ -55,53 +40,50 @@ class SignUpCompleteScreen extends Component {
   };
   render() {
     return (
-      <ScrollView keyboardShouldPersistTaps="always"  >
-      <View style={styles.container}>
-        <Image
-          source={Images.EmailSend}
-          style={{ width: width, height: height/2, marginTop: 30 }}
-        />
-        <View
-          style={{
-        //    marginTop: 50,
-            flex: 1,
-            alignItems: "center",
-            paddingHorizontal: 30
-          }}
-        >
-          <Text
+      <ScrollView keyboardShouldPersistTaps="always">
+        <View style={styles.container}>
+          <Image
+            source={Images.EmailSend}
+            style={{ width: width, height: height / 2, marginTop: 30 }}
+          />
+          <View
             style={{
-              color: "black",
-              fontSize: 24,
-              //fontWeight: "bold",
-              fontFamily: "Nunito-Black",
-              marginBottom: 15,
-            //  marginTop:20
+              //    marginTop: 50,
+              flex: 1,
+              alignItems: "center",
+              paddingHorizontal: 30
             }}
           >
-            Check your email
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              textAlign: "center",
-              fontSize: 16,
-              fontFamily: "Nunito-Regular"
-            }}
-          >
-            We've sent instructions on how to reset your password.
-          </Text>
-          
-              
+            <Text
+              style={{
+                color: "black",
+                fontSize: 24,
+                //fontWeight: "bold",
+                fontFamily: "Nunito-Black",
+                marginBottom: 15
+                //  marginTop:20
+              }}
+            >
+              Check your email
+            </Text>
+            <Text
+              style={{
+                color: "black",
+                textAlign: "center",
+                fontSize: 16,
+                fontFamily: "Nunito-Regular"
+              }}
+            >
+              We've sent instructions on how to reset your password.
+            </Text>
           </View>
-          </View>
-          <View style={{ paddingHorizontal : 35, paddingTop: 80}} > 
-              <CustomButton
-              buttonText={"GO TO EMAIL"}
-              onButtonPress={() => this.handleLogin()}
-            />     
-            </View>
-
+        </View>
+        <View style={{ paddingHorizontal: 35, paddingTop: 80 }}>
+          <CustomButton
+            buttonText={"GO TO EMAIL"}
+            onButtonPress={() => this.handleLogin()}
+          />
+        </View>
       </ScrollView>
     );
   }
@@ -136,7 +118,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start"
   }
-  
-  
 });
->>>>>>> 5c731c6ff548db3072c04f0d1cfe9555d5cb9758

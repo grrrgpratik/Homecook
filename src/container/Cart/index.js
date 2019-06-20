@@ -6,13 +6,17 @@ import {
   Platform,
   Image,
   FlatList,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from "react-native";
-import { Color } from "common_f";
+import { Color, Config } from "common_f";
 import Icon from "react-native-vector-icons/Ionicons";
 import { CustomButton, EmptyCart } from "component_f";
-
-const { width } = Dimensions.get("window");
+import { LoadingSpinnerOverlay } from "component_f";
+import fetch from "react-native-fetch-polyfill";
+import AsyncStorage from "@react-native-community/async-storage";
+import { toast } from "app_f/Omni";
+const { width, height } = Dimensions.get("window");
 
 const mocks = [
   {
@@ -63,6 +67,70 @@ const mocks = [
 ];
 
 class Cart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cart: []
+    };
+  }
+
+  componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("willFocus", () => {
+      this.loadCart();
+    });
+  }
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+
+  loadCart = () => {
+    AsyncStorage.getItem("token").then(token => {
+      const fetchOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`
+        },
+        timeout: 10000
+      };
+
+      fetch(Config.getCartUrl, fetchOptions)
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(responseJSON => {
+              console.log(responseJSON);
+              this.setState({ cart: responseJSON });
+            });
+          } else {
+            response.json().then(responseJSON => {
+              toast(responseJSON.message);
+            });
+          }
+        })
+        .catch(() => {
+          toast("Network request failed");
+        });
+    });
+  };
+
+  _renderActivityIndicator() {
+    return ActivityIndicator ? (
+      <ActivityIndicator
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    ) : Platform.OS == "android" ? (
+      <ProgressBarAndroid color={Color.secondary} styleAttr={"small"} />
+    ) : (
+      <ActivityIndicatorIOS
+        animating={true}
+        color={Color.secondary}
+        size={"small"}
+      />
+    );
+  }
+
   renderHeader() {
     return (
       <View style={styles.header}>
@@ -76,8 +144,8 @@ class Cart extends Component {
       <View style={styles.recommendContainer}>
         <View style={{ flexDirection: "column" }}>
           <FlatList
-            style={{ overflow: "visible" }}
-            data={mocks}
+            style={{ height: height * 0.52 }}
+            data={this.state.cart}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) => this.renderItem(item, index)}
           />
@@ -106,7 +174,9 @@ class Cart extends Component {
         <View style={{ flex: 0.25 }}>
           <Image
             style={{ width: 65, height: 65, borderRadius: 6 }}
-            source={{ uri: item.preview }}
+            source={{
+              uri: `${Config.baseUrl}${item.items.image_url[0].image}`
+            }}
           />
         </View>
         <View
@@ -130,7 +200,7 @@ class Cart extends Component {
                   fontFamily: "Nunito-Bold"
                 }}
               >
-                {item.title}
+                {item.items.name}
               </Text>
               <Text
                 style={{
@@ -140,7 +210,7 @@ class Cart extends Component {
                   marginBottom: 10
                 }}
               >
-                Rs. {Number(item.price).toFixed(2)}
+                Rs. {Number(item.items.price).toFixed(2)}
               </Text>
             </View>
 
@@ -180,7 +250,7 @@ class Cart extends Component {
                   fontFamily: "Nunito-Regular"
                 }}
               >
-                {" Pratik Gurung"}
+                {` ${item.items.owner.full_name}`}
               </Text>
             </Text>
 
@@ -196,7 +266,7 @@ class Cart extends Component {
                 -
               </Text>
 
-              <Text style={styles.regularText}>{item.id}</Text>
+              <Text style={styles.regularText}>{item.quantity}</Text>
 
               <Text
                 style={{
@@ -305,17 +375,29 @@ class Cart extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        {this.renderHeader()}
-        {this.renderCartItem()}
-        {this.renderSubTotal()}
-        <View style={styles.buttonContainer}>
-          <CustomButton buttonText={"PROCEED TO CHECKOUT"} />
+    if (this.state.cart.length > 0) {
+      return (
+        <View style={styles.container}>
+          {this.renderHeader()}
+          {this.renderCartItem()}
+          {this.renderSubTotal()}
+          <View style={styles.buttonContainer}>
+            <CustomButton
+              buttonText={"PROCEED TO CHECKOUT"}
+              onButtonPress={this.props.onOrderScreenPress}
+            />
+          </View>
+          <LoadingSpinnerOverlay
+            ref={component => (this._modal_2_LoadingSpinnerOverLay = component)}
+          >
+            {this._renderActivityIndicator()}
+          </LoadingSpinnerOverlay>
         </View>
-      </View>
-      // <EmptyCart onEmptyCartPress={this.props.onHomeScreenPress} />
-    );
+        // <EmptyCart onEmptyCartPress={this.props.onHomeScreenPress} />
+      );
+    } else {
+      return <EmptyCart onEmptyCartPress={this.props.onHomeScreenPress} />;
+    }
   }
 }
 export default Cart;

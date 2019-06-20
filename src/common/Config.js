@@ -12,6 +12,10 @@ const SearchUrl = baseUrl + "/api/models/Product/";
 
 const editProfileUrl = baseUrl + "/api/models/edit-profile/";
 
+const addToCartUrl = baseUrl + "/api/models/Cart/";
+
+const getCartUrl = baseUrl + "/api/models/cart-list/";
+
 export default {
   baseUrl,
   loginUrl,
@@ -19,5 +23,7 @@ export default {
   homeUrl,
   passwordresetUrl,
   SearchUrl,
-  editProfileUrl
+  editProfileUrl,
+  addToCartUrl,
+  getCartUrl
 };

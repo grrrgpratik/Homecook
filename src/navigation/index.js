@@ -22,6 +22,7 @@ import SaveProfileScreen from "./SaveProfileScreen";
 import ViewAllScreen from "./ViewAllScreen";
 import ForgetPasswordScreen from "./ForgetPassword";
 import SignUpComplete from "./SignUpComplete";
+import OrderComplete from "./OrderComplete";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -65,6 +66,16 @@ HomeScreenStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+const CartScreenStack = createStackNavigator(
+  {
+    Cart: CartScreen,
+    OrderCompleteScreen: OrderComplete
+  },
+  {
+    mode: "modal"
+  }
+);
+
 const AppNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -84,7 +95,7 @@ const AppNavigator = createBottomTabNavigator(
       }
     },
     Cart: {
-      screen: CartScreen,
+      screen: CartScreenStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <TabBarIcon icon={Images.IconCart} tintColor={tintColor} />

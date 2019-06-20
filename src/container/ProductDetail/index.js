@@ -16,6 +16,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { CustomButton } from "component_f";
 import styles from "./styles";
+import fetch from "react-native-fetch-polyfill";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const article = [
   {
@@ -119,6 +121,42 @@ class ProductDetail extends PureComponent {
       );
     });
   }
+  addToCart = product => {
+    AsyncStorage.getItem("token").then(token => {
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`
+        },
+        body: JSON.stringify({
+          items: product.id,
+          quantity: 1,
+          ordered: false
+        }),
+        timeout: 10000
+      };
+      console.log(fetchOptions);
+      fetch(Config.addToCartUrl, fetchOptions)
+        .then(response => {
+          if (response.status === 201) {
+            response.json().then(responseJSON => {
+              console.log(responseJSON);
+
+              this.props.onCartScreenPress({ product });
+            });
+          } else {
+            response.json().then(responseJSON => {
+              toast(responseJSON.message);
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          toast("Network request failed");
+        });
+    });
+  };
 
   render() {
     const { product } = this.props;
@@ -271,7 +309,7 @@ class ProductDetail extends PureComponent {
         <View style={styles.buttonContainer}>
           <CustomButton
             buttonText={"ADD TO CART"}
-            onButtonPress={() => this.props.onCartScreenPress({ product })}
+            onButtonPress={() => this.addToCart(product)}
           />
         </View>
       </View>

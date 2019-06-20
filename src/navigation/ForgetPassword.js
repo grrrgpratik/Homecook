@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-
-export default class ForgetPasswordScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    );
-  }
-}
-=======
 import React, { Component } from "react";
 import {
   View,
@@ -211,4 +197,3 @@ const styles = StyleSheet.create({
     borderRadius: 5
   }
 });
->>>>>>> 5c731c6ff548db3072c04f0d1cfe9555d5cb9758

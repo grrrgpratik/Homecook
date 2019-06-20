@@ -29,14 +29,12 @@ const mocks = [
     saved: true,
     location: "0.4 Km from you",
     temperature: 34,
-    title: "Santorini",
-    description:
-      "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC",
+    title: "Green Salad",
+    description: "Fresh Green Salad",
     rating: 4.3,
     price: 224.0,
     reviews: 3212,
-    preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+    preview: `${Config.baseUrl}/media/Product/green-salad.jpg`,
     images: [
       "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
@@ -47,19 +45,18 @@ const mocks = [
   {
     id: 2,
     user: {
-      name: "Lelia Chavez",
+      name: "Chicken Burger",
       avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: false,
     location: "0.4 Km from you",
     temperature: 34,
     title: "Loutraki",
-    description: "This attractive small town, 80 kilometers from Athens",
+    description: "Tasty Chicken Burger",
     rating: 4.6,
     reviews: 3212,
     price: 122.0,
-    preview:
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+    preview: `${Config.baseUrl}/media/Product/chicken-burger.jpg`,
     images: [
       "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
@@ -68,19 +65,18 @@ const mocks = [
   {
     id: 3,
     user: {
-      name: "Lelia Chavez",
+      name: "Chicken Biryani",
       avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     saved: true,
     location: "0.4 Km from you",
     temperature: 34,
     title: "Santorini",
-    description: "Santorini - Description",
+    description: "Chicken Burger",
     rating: 3.2,
     reviews: 3212,
     price: 432.0,
-    preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
+    preview: `${Config.baseUrl}/media/Product/Chicken-Biryani_1-1.jpg`,
     images: [
       "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
@@ -91,7 +87,7 @@ const mocks = [
   {
     id: 4,
     user: {
-      name: "Lelia Chavez",
+      name: "Muesli",
       avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     location: "0.4 Km from you",
@@ -101,8 +97,7 @@ const mocks = [
     rating: 5,
     reviews: 3212,
     price: 400.0,
-    preview:
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
+    preview: `${Config.baseUrl}/media/Product/museli.jpg`,
     images: [
       "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
@@ -436,7 +431,7 @@ class Search extends Component {
                       textAlign: "left"
                     }}
                   >
-                    Chef: {item.owner.full_name}
+                    {item.description}
                   </Text>
                   <Text
                     style={{
