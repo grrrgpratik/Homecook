@@ -28,8 +28,9 @@ class UserProfileScreen extends PureComponent {
     };
   };
   render() {
-    const { navigate } = this.props.navigation;
-    return <UserProfile />;
+    const { navigate, state } = this.props.navigation;
+
+    return <UserProfile owner={state.params.product.product.owner} />;
   }
 }
 export default UserProfileScreen;

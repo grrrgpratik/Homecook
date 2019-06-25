@@ -19,36 +19,6 @@ import styles from "./styles";
 import fetch from "react-native-fetch-polyfill";
 import AsyncStorage from "@react-native-community/async-storage";
 
-const article = [
-  {
-    id: 1,
-    user: {
-      name: "Lelia Chavez",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    saved: true,
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Santorini",
-    description:
-      "A chunky salad of cucumbers, cherry tomatoes, peppery mint leaves drizzeled with a black olives sauce.",
-    rating: 4.3,
-    price: 224.0,
-    reviews: 3212,
-    preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
-    ],
-    review: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
-    ]
-  }
-];
 const { width, height } = Dimensions.get("window");
 
 class ProductDetail extends PureComponent {
@@ -160,6 +130,7 @@ class ProductDetail extends PureComponent {
 
   render() {
     const { product } = this.props;
+    const { product_rating1 } = this.props.product;
     console.log(product);
     return (
       <View style={{ flex: 1 }}>
@@ -173,7 +144,7 @@ class ProductDetail extends PureComponent {
           <View style={[styles.container, styles.contentHeader]}>
             <TouchableHighlight
               activeOpacity={0.8}
-              onPress={this.props.onProfileScreenPress}
+              onPress={() => this.props.onProfileScreenPress({ product })}
               style={styles.profileButton}
             >
               <Image
@@ -190,9 +161,9 @@ class ProductDetail extends PureComponent {
 
             <View style={[styles.row, styles.rating]}>
               <View style={[styles.row, { alignItems: "center" }]}>
-                {this.renderRatings(article[0].rating)}
+                {this.renderRatings(product.rating)}
                 <Text style={[styles.nunitoRegular, styles.reviewText]}>
-                  ({article[0].reviews} reviews)
+                  ({product.rating} reviews)
                 </Text>
               </View>
               <Text style={[styles.nunitoBlack, styles.priceText]}>
@@ -262,48 +233,59 @@ class ProductDetail extends PureComponent {
 
             <Text style={[styles.titleText, styles.nunitoBlack]}> Reviews</Text>
 
-            {article[0].review.map((item, index) => {
-              return (
-                <View
-                  key={index}
-                  style={[styles.row, styles.reviewContainer, styles.shadow]}
-                >
-                  <View style={styles.reviewImageContainer}>
-                    <Image
-                      style={styles.reviewAvatar}
-                      source={{
-                        uri: "https://randomuser.me/api/portraits/women/44.jpg"
-                      }}
-                    />
-                    <Text
-                      style={[
-                        styles.nunitoRegular,
-                        styles.smallGray,
-                        { marginTop: 3 }
-                      ]}
-                    >
-                      Pratik Gurung
-                    </Text>
-                  </View>
-
+            {product_rating1.length > 0 ? (
+              product_rating1.map((item, index) => {
+                return (
                   <View
-                    style={{
-                      flex: 5,
-                      paddingVertical: 22,
-                      paddingHorizontal: 6
-                    }}
+                    key={index}
+                    style={[styles.row, styles.reviewContainer, styles.shadow]}
                   >
-                    <Text style={[styles.nunitoRegular, styles.regularGray]}>
-                      We had such delicious food and dishes. Fantastic thalis,
-                      superb
-                    </Text>
-                    <Text style={[styles.nunitoRegular, styles.reviewDate]}>
-                      22 Dec, 2018
-                    </Text>
+                    <View style={styles.reviewImageContainer}>
+                      <Image
+                        style={styles.reviewAvatar}
+                        source={{
+                          uri:
+                            "https://randomuser.me/api/portraits/women/44.jpg"
+                        }}
+                      />
+                      <Text
+                        style={[
+                          styles.nunitoRegular,
+                          styles.smallGray,
+                          { marginTop: 3 }
+                        ]}
+                      >
+                        {item.owner}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={{
+                        flex: 5,
+                        paddingVertical: 22,
+                        paddingHorizontal: 6
+                      }}
+                    >
+                      <Text style={[styles.nunitoRegular, styles.regularGray]}>
+                        {item.feedback}
+                      </Text>
+                      <Text style={[styles.nunitoRegular, styles.reviewDate]}>
+                        22 Dec, 2018
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              );
-            })}
+                );
+              })
+            ) : (
+              <Text
+                style={[
+                  styles.nunitoRegular,
+                  { color: "black", padding: 20, textAlign: "center" }
+                ]}
+              >
+                No reviews for this product yet.
+              </Text>
+            )}
           </View>
         </ScrollView>
         <View style={styles.buttonContainer}>

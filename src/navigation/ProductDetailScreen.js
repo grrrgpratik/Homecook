@@ -33,7 +33,7 @@ class ProductDetailScreen extends PureComponent {
     return (
       <ProductDetail
         product={state.params.product.item}
-        onProfileScreenPress={() => navigate("UserProfile")}
+        onProfileScreenPress={product => navigate("UserProfile", { product })}
         onCartScreenPress={product => navigate("Cart", { product })}
       />
     );

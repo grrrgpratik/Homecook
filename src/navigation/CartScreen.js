@@ -12,7 +12,7 @@ class CartScreen extends Component {
       <Cart
         onHomeScreenPress={() => navigate("Home")}
         navigation={this.props.navigation}
-        onOrderScreenPress={() => navigate("Order")}
+        onOrderScreenPress={() => navigate("OrderCompleteScreen")}
       />
     );
   }

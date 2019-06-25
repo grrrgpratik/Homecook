@@ -40,27 +40,28 @@ class Home extends Component {
 
   componentDidMount() {
     console.log("inside component");
-    // navigator.geolocation.getCurrentPosition(
-    //   position => {
-    //     const geo = {
-    //       lat: position.coords.latitude,
-    //       lng: position.coords.longitude
-    //     };
-    //     Geocoder.geocodePosition(geo)
-    //       .then(res => {
-    //         console.log(res);
-    //         this.props.updateCurrentLocation(
-    //           geo.lng,
-    //           geo.lat,
-    //           res[0].formattedAddress
-    //         );
-    //       })
-    //       .catch(err => toast(err));
-    //   },
-    //   error => {
-    //     console.log(JSON.stringify(error));
-    //     this.setState({ visible: true });
-    //   })
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const geo = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        Geocoder.geocodePosition(geo)
+          .then(res => {
+            console.log(res);
+            this.props.updateCurrentLocation(
+              geo.lng,
+              geo.lat,
+              res[0].formattedAddress
+            );
+          })
+          .catch(err => toast(err));
+      },
+      error => {
+        console.log(JSON.stringify(error));
+        this.setState({ visible: true });
+      }
+    );
     // {
     //   enableHighAccuracy: false,
     //   timeout: 2000,

@@ -144,7 +144,7 @@ class Cart extends Component {
       <View style={styles.recommendContainer}>
         <View style={{ flexDirection: "column" }}>
           <FlatList
-            style={{ height: height * 0.52 }}
+            style={{ height: height * 0.57 }}
             data={this.state.cart}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item, index }) => this.renderItem(item, index)}
@@ -285,15 +285,16 @@ class Cart extends Component {
     );
   };
 
-  renderSubTotal() {
+  renderSubTotal(cart_total) {
+    var delivery = cart_total * 0.1;
     return (
-      <View style={{ paddingBottom: 28 }}>
+      <View>
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-evenly",
-            marginLeft: width * 0.5,
-            paddingVertical: 4
+            marginLeft: width * 0.5
+            // paddingBottom: 4
           }}
         >
           <Text
@@ -312,7 +313,7 @@ class Cart extends Component {
               fontFamily: "Nunito-Bold"
             }}
           >
-            Rs. 100
+            {`Rs. ${cart_total}`}
           </Text>
         </View>
         <View
@@ -339,7 +340,7 @@ class Cart extends Component {
               fontFamily: "Nunito-Bold"
             }}
           >
-            Rs. 10
+            {`Rs. ${delivery}`}
           </Text>
         </View>
 
@@ -367,7 +368,7 @@ class Cart extends Component {
               fontFamily: "Nunito-Black"
             }}
           >
-            Rs. 100
+            {`Rs. ${cart_total + delivery}`}
           </Text>
         </View>
       </View>
@@ -376,11 +377,18 @@ class Cart extends Component {
 
   render() {
     if (this.state.cart.length > 0) {
+      const { cart } = this.state;
+      var cart_total = 0;
+      cart.map(item => {
+        cart_total =
+          cart_total + Number(item.items.price) * Number(item.quantity);
+        console.log(cart_total);
+      });
       return (
         <View style={styles.container}>
           {this.renderHeader()}
           {this.renderCartItem()}
-          {this.renderSubTotal()}
+          {this.renderSubTotal(cart_total)}
           <View style={styles.buttonContainer}>
             <CustomButton
               buttonText={"PROCEED TO CHECKOUT"}

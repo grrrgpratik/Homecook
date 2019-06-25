@@ -7,6 +7,7 @@ import ScrollableView from "./ScrollableView";
 import ScrollableTabView from "./ScrollableTabView";
 import LoadingSpinnerOverlay from "./LoadingSpinnerOverlay";
 import EmptyCart from "./EmptyCart";
+import Route from "./Route";
 
 export {
   PasswordInputText,
@@ -17,5 +18,6 @@ export {
   ScrollableView,
   ScrollableTabView,
   LoadingSpinnerOverlay,
-  EmptyCart
+  EmptyCart,
+  Route
 };

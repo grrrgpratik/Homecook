@@ -11,12 +11,12 @@ import {
 } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { Color } from "common_f";
+import { Route } from "component_f";
 
 const mocks = [1, 2, 3, 4];
 
 const FirstRoute = item => (
   <View
-    key={item}
     style={[
       styles.shadow,
       {
@@ -78,17 +78,17 @@ const FirstRoute = item => (
   </View>
 );
 
-const Route = () => {
-  return (
-    <ScrollView>
-      <FlatList
-        data={mocks}
-        renderItem={FirstRoute}
-        keyExtractor={(item, index) => item}
-      />
-    </ScrollView>
-  );
-};
+// const Route = () => {
+//   return (
+//     <ScrollView>
+//       <FlatList
+//         data={mocks}
+//         renderItem={FirstRoute}
+//         keyExtractor={(item, index) => `route-${index}`}
+//       />
+//     </ScrollView>
+//   );
+// };
 
 const width = Dimensions.get("window").width;
 
@@ -98,21 +98,32 @@ export default class ScrollableView extends React.Component {
     routes: [
       { key: "first", title: "Breakfast" },
       { key: "second", title: "Lunch" },
-      { key: "third", title: "Dinner" },
-      { key: "fourth", title: "Special Item" }
+      { key: "third", title: "Snacks" },
+      { key: "fourth", title: "Dinner" }
     ]
   };
 
+  renderScene = ({ route }) => {
+    switch (route.key) {
+      case "first":
+        return <Route product={this.props.userProduct.breakfast} />;
+      case "second":
+        return <Route product={this.props.userProduct.lunch} />;
+      case "third":
+        return <Route product={this.props.userProduct.snacks} />;
+      case "fourth":
+        return <Route product={this.props.userProduct.dinner} />;
+      default:
+        return null;
+    }
+  };
+
   render() {
+    console.log("user Product", this.props.userProduct);
     return (
       <TabView
         navigationState={this.state}
-        renderScene={SceneMap({
-          first: Route,
-          second: Route,
-          third: Route,
-          fourth: Route
-        })}
+        renderScene={this.renderScene}
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: width }}
         style={{ flex: 1, height: width + 145, padding: 2 }}
