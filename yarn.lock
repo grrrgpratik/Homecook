@@ -5398,6 +5398,11 @@ react-native-animatable@^1.3.2:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-email-link@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-email-link/-/react-native-email-link-1.3.0.tgz#ad410f81a1f16d8f4ba5e9b986a1d5c44e8a3dba"
+  integrity sha512-eMo+ym1Riah42hQLPfTs5qXuXGHkdymaJLiO/QJwQ9IDY+YfKQ7KYffdFZByANyTBxPVbjQHK9r2l7x71Hxkig==
+
 react-native-fetch-polyfill@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/react-native-fetch-polyfill/-/react-native-fetch-polyfill-1.1.3.tgz#a02d9069a2f7108ca0b70b8469085c67cc02949c"

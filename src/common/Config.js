@@ -19,6 +19,8 @@ const getCartUrl = baseUrl + "/api/models/cart-list/";
 
 const getUserInfoUrl = baseUrl + "/api/models/users/me/";
 
+const createOrderUrl = baseUrl + "/api/models/orderlist/";
+
 export default {
   baseUrl,
   loginUrl,
@@ -29,5 +31,6 @@ export default {
   editProfileUrl,
   addToCartUrl,
   getCartUrl,
-  getUserInfoUrl
+  getUserInfoUrl,
+  createOrderUrl
 };

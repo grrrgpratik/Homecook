@@ -23,6 +23,7 @@ import ViewAllScreen from "./ViewAllScreen";
 import ForgetPasswordScreen from "./ForgetPassword";
 import SignUpComplete from "./SignUpComplete";
 import OrderComplete from "./OrderComplete";
+import DeliveryScreen from "./DeliveryScreen";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -69,6 +70,7 @@ HomeScreenStack.navigationOptions = ({ navigation }) => {
 const CartScreenStack = createStackNavigator(
   {
     Cart: CartScreen,
+    Delivery: DeliveryScreen,
     OrderCompleteScreen: OrderComplete
   },
   {

@@ -14,6 +14,7 @@ import { Color, Images } from "common_f";
 import { CustomButton } from "component_f";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
+import { openInbox } from "react-native-email-link";
 
 const { height, width } = Dimensions.get("window");
 
@@ -81,7 +82,7 @@ class SignUpCompleteScreen extends Component {
         <View style={{ paddingHorizontal: 35, paddingTop: 80 }}>
           <CustomButton
             buttonText={"GO TO EMAIL"}
-            onButtonPress={() => this.handleLogin()}
+            onButtonPress={() => openInbox()}
           />
         </View>
       </ScrollView>

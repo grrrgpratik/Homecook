@@ -392,7 +392,9 @@ class Cart extends Component {
           <View style={styles.buttonContainer}>
             <CustomButton
               buttonText={"PROCEED TO CHECKOUT"}
-              onButtonPress={this.props.onOrderScreenPress}
+              onButtonPress={() =>
+                this.props.onOrderScreenPress(this.state.cart)
+              }
             />
           </View>
           <LoadingSpinnerOverlay

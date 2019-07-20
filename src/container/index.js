@@ -13,7 +13,9 @@ import _Search from "./Search";
 import _Cart from "./Cart";
 import _ViewAll from "./ViewAll";
 import _Order from "./Order";
+import _Delivery from "./Delivery";
 
+export const Delivery = _Delivery;
 export const Order = _Order;
 export const ViewAll = _ViewAll;
 export const Cart = _Cart;
