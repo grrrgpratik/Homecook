@@ -106,7 +106,10 @@ class Signup extends Component {
       phonenumber,
       confirmPasswordText
     } = this.state;
-
+    if (passwordtext.length < 6) {
+      this._modal_2_LoadingSpinnerOverLay.hide();
+      toast("Password length should be greater than 6");
+    }
     if (passwordtext === confirmPasswordText) {
       const fetchOptions = {
         method: "POST",
@@ -286,7 +289,7 @@ class Signup extends Component {
 
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={()=>this.props.onSignUpPress()}
+              onPress={() => this._showModal_2_LoadingSpinnerOverLay()}
             >
               <LinearGradient
                 start={{ x: 0, y: 0 }}

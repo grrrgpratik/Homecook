@@ -21,6 +21,8 @@ const getUserInfoUrl = baseUrl + "/api/models/users/me/";
 
 const createOrderUrl = baseUrl + "/api/models/orderlist/";
 
+const orderHistory = baseUrl + "/api/models/order-history1/";
+
 export default {
   baseUrl,
   loginUrl,
@@ -32,5 +34,6 @@ export default {
   addToCartUrl,
   getCartUrl,
   getUserInfoUrl,
-  createOrderUrl
+  createOrderUrl,
+  orderHistory
 };

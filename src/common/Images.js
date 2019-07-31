@@ -22,7 +22,9 @@ const Images = {
   Sandwich: require("images_f/veg-sandwich.png"),
   ForgetPassword: require("images_f/forget_password.png"),
   EmailSend: require("images_f/email_sent.png"),
-  EmptyCart: require("images_f/Artboard.png")
+  EmptyCart: require("images_f/Artboard.png"),
+  CashOnDelivery: require("images_f/COD.png"),
+  KhaltiLogo: require("images_f/khalti.png")
 };
 
 export default Images;

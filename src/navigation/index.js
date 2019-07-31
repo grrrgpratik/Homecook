@@ -24,6 +24,8 @@ import ForgetPasswordScreen from "./ForgetPassword";
 import SignUpComplete from "./SignUpComplete";
 import OrderComplete from "./OrderComplete";
 import DeliveryScreen from "./DeliveryScreen";
+import PaymentScreen from "./PaymentScreen";
+import KhaltiScreen from "./KhaltiScreen";
 
 import { TabBar, TabBarIcon } from "component_f";
 import { Images, Color } from "common_f";
@@ -71,6 +73,8 @@ const CartScreenStack = createStackNavigator(
   {
     Cart: CartScreen,
     Delivery: DeliveryScreen,
+    Payment: PaymentScreen,
+    Khalti: KhaltiScreen,
     OrderCompleteScreen: OrderComplete
   },
   {

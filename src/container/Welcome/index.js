@@ -13,6 +13,7 @@ import {
 import styles from "./styles";
 import { Color, Images } from "common_f";
 import LinearGradient from "react-native-linear-gradient";
+import OneSignal from "react-native-onesignal";
 
 const { width, height } = Dimensions.get("window");
 

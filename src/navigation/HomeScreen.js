@@ -1,16 +1,34 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Home } from "container_f";
 
-class HomeScreen extends PureComponent {
+class HomeScreen extends Component {
   static navigationOptions = {
     header: null
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activity: false
+    };
+  }
+
+  updateData = data => {
+    this.setState({
+      activity: !this.state.activity
+    });
+    // some other stuff
+  };
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <Home
-        onMapScreenPress={() => navigate("Map")}
+        {...this.props}
+        onMapScreenPress={() =>
+          navigate("Map", { updateData: this.updateData })
+        }
+        activity={this.state.activity}
         onProductDetailScreen={product => navigate("Product", { product })}
         onEditProfileScreen={() => navigate("EditProfile")}
         onViewAllScreen={product => navigate("ViewAll", { product })}

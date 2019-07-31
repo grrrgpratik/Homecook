@@ -29,8 +29,8 @@ class Login extends Component {
     this.state = {
       icEye: "visibility-off",
       password: true,
-      email: "",
-      passwordtext: "",
+      email: "gurung.pratik04@gmail.com",
+      passwordtext: "plih1230",
       errors: []
     };
   }

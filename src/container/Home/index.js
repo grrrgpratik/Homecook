@@ -38,8 +38,17 @@ class Home extends Component {
     };
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.activity === true) {
+      this.fetchData();
+    }
+  }
   componentDidMount() {
-    console.log("inside component");
+    this.fetchData();
+  }
+
+  fetchData = () => {
+    this._modal_2_LoadingSpinnerOverLay.show();
     navigator.geolocation.getCurrentPosition(
       position => {
         const geo = {
@@ -67,7 +76,7 @@ class Home extends Component {
     //   timeout: 2000,
     //   maximumAge: 2000
     // }
-    this._modal_2_LoadingSpinnerOverLay.show();
+
     AsyncStorage.getItem("token").then(token => {
       const fetchOptions = {
         method: "GET",
@@ -98,7 +107,7 @@ class Home extends Component {
           toast("Network request failed");
         });
     });
-  }
+  };
 
   _renderActivityIndicator() {
     return ActivityIndicator ? (

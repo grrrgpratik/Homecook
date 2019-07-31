@@ -19,7 +19,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 class Delivery extends Component {
   state = {
-    name: "Chicken Chowmein",
+    name: "Pratik Gurung",
     streetaddress: "Ranipauwa, Pokhara",
     city: "Pokhara",
     state1: "Gandaki",
@@ -77,11 +77,12 @@ class Delivery extends Component {
         .then(response => {
           console.log(response);
           if (response.status === 201 || response.status === 200) {
+            this.props.onPaymentPress();
             this._modal_2_LoadingSpinnerOverLay.hide();
-            this.props.onOrderScreenPress();
           } else {
             response.json().then(responseJSON => {
               console.log(responseJSON);
+
               this._modal_2_LoadingSpinnerOverLay.hide();
               toast(responseJSON.message);
             });
@@ -92,6 +93,27 @@ class Delivery extends Component {
           toast(err);
         });
     });
+  };
+
+  sendNotification = () => {
+    fetch("https://onesignal.com/api/v1/notifications", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic MGY3NmZkYjItZTc4Yi00MGVlLWEzNDUtYTNmZjEwNzNkNzli"
+      },
+      body: JSON.stringify({
+        app_id: "155f3594-6eaa-4f62-b68b-9dead60f99e7",
+        include_player_ids: ["7a5ca2ab-24a1-4808-b812-78a78ba0df63"],
+        contents: {
+          en: "Hi Cook, You have received a new order"
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(resJSON => {
+        console.log(resJSON);
+      });
   };
 
   render() {
@@ -187,6 +209,7 @@ class Delivery extends Component {
               <CustomButton
                 buttonText={"Confirm Order"}
                 onButtonPress={() => this.handleAddProduct(cartid)}
+                // onButtonPress={this.props.onPaymentPress}
               />
             </View>
           </View>

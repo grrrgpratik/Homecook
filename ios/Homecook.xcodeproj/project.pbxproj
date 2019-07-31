@@ -79,6 +79,7 @@
 		F155C6BF77714A2C8BE4648E /* libRNCNetInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C249C9D82CA24C868BD6BDA1 /* libRNCNetInfo-tvOS.a */; };
 		F4B4479C656F4C4B881C813C /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E61CE4E68334387B31D1DDF /* libRNGeocoder.a */; };
 		9BB2512679CD4EB1B571A4EA /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21591B40A18C49E5891FB2B2 /* libRNCAsyncStorage.a */; };
+		7E251110116A42CCBF09F76D /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 115CD39A925C4E29B5EF848E /* libRCTOneSignal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -511,6 +512,8 @@
 		F81F7BD4199D481298193789 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		B21946C8256948638780AEE4 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		21591B40A18C49E5891FB2B2 /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		AEE63155849B4F42AA75FB3F /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; name = "RCTOneSignal.xcodeproj"; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		115CD39A925C4E29B5EF848E /* libRCTOneSignal.a */ = {isa = PBXFileReference; name = "libRCTOneSignal.a"; path = "libRCTOneSignal.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -547,6 +550,7 @@
 				F4B4479C656F4C4B881C813C /* libRNGeocoder.a in Frameworks */,
 				11F84C9AB4BF48DCAE7C62FE /* libRNReanimated.a in Frameworks */,
 				9BB2512679CD4EB1B571A4EA /* libRNCAsyncStorage.a in Frameworks */,
+				7E251110116A42CCBF09F76D /* libRCTOneSignal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,6 +787,7 @@
 				60B7FAB1B7594A5D8B2B462D /* RNGeocoder.xcodeproj */,
 				D492085CD1564E39A240AF3D /* RNReanimated.xcodeproj */,
 				B21946C8256948638780AEE4 /* RNCAsyncStorage.xcodeproj */,
+				AEE63155849B4F42AA75FB3F /* RCTOneSignal.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1625,12 +1630,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = HomecookTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1668,12 +1675,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = HomecookTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1713,6 +1722,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = Homecook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1743,6 +1753,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = Homecook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1779,11 +1790,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = "Homecook-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1830,11 +1843,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = "Homecook-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1880,11 +1895,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = "Homecook-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1930,11 +1947,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-geocoderiosRNGeocoder",
 					"$(SRCROOT)..\node_modules\neact-native-reanimatedios/**",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-onesignal\ios/**",
 				);
 				INFOPLIST_FILE = "Homecook-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

@@ -6,9 +6,14 @@ class MapScreen extends PureComponent {
     header: null
   };
 
+  onSetUpLocation = () => {
+    const { goBack, state } = this.props.navigation;
+    state.params.updateData("test");
+    goBack();
+  };
   render() {
-    const { goBack } = this.props.navigation;
-    return <Map onSetUpLocation={() => goBack()} />;
+    const { goBack, state } = this.props.navigation;
+    return <Map onSetUpLocation={this.onSetUpLocation} />;
   }
 }
 export default MapScreen;

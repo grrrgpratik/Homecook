@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Delivery } from "container_f";
+import { Payment } from "container_f";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,7 +10,7 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Color } from "common_f";
 
-class DeliveryScreen extends Component {
+class PaymentScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       header: (
@@ -25,27 +25,25 @@ class DeliveryScreen extends Component {
               size={30}
             />
           </TouchableOpacity>
-          <Text style={styles.title}>Delivery Address</Text>
+          <Text style={styles.title}>Payment</Text>
         </View>
       )
       // headerTransparent: true
       //mode: "modal"
     };
   };
+
   render() {
-    const { goBack, state, navigate } = this.props.navigation;
-    console.log(state.params.cart);
+    const { navigate } = this.props.navigation;
     return (
-      <Delivery
-        goBack={() => goBack()}
-        cart={state.params.cart}
+      <Payment
         onOrderScreenPress={() => navigate("OrderCompleteScreen")}
-        onPaymentPress={() => navigate("Payment")}
+        onKhaltiPress={() => navigate("Khalti")}
       />
     );
   }
 }
-export default DeliveryScreen;
+export default PaymentScreen;
 
 const styles = StyleSheet.create({
   row: {
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
     color: Color.black,
     fontFamily: "Nunito-Black",
     alignSelf: "center",
-    marginLeft: 82
+    marginLeft: 112
     //padding: 10
   },
   titleContainer: {

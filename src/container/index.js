@@ -14,7 +14,11 @@ import _Cart from "./Cart";
 import _ViewAll from "./ViewAll";
 import _Order from "./Order";
 import _Delivery from "./Delivery";
+import _Payment from "./Payment";
+import _Khalti from "./Khalti";
 
+export const Khalti = _Khalti;
+export const Payment = _Payment;
 export const Delivery = _Delivery;
 export const Order = _Order;
 export const ViewAll = _ViewAll;
