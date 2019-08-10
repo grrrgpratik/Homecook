@@ -9,7 +9,7 @@ This app is made to be simple and may help people knowing React & Redux to get i
 
 ## Preview
 
-![gif preview](https://raw.githubusercontent.com/mbeaudru/react-native-sample/master/assets/preview.gif)
+![gif preview](https://pasteboard.co/Is5fkQk.png)
 
 > Note: 6MB size GIF, might take some time to load
 
