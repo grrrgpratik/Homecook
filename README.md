@@ -9,7 +9,7 @@ This app is made to be simple and may help people knowing React & Redux to get i
 
 ## Preview
 
-![gif preview](https://pasteboard.co/Is5fkQk.png)
+![screenshot_2](https://user-images.githubusercontent.com/33624609/62825731-187dcc80-bbd0-11e9-86b1-68afe948fa3a.png)
 
 > Note: 6MB size GIF, might take some time to load
 
