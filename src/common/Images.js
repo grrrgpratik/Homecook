@@ -24,7 +24,8 @@ const Images = {
   EmailSend: require("images_f/email_sent.png"),
   EmptyCart: require("images_f/Artboard.png"),
   CashOnDelivery: require("images_f/COD.png"),
-  KhaltiLogo: require("images_f/khalti.png")
+  KhaltiLogo: require("images_f/khalti.png"),
+  UserImage: "http://grgpratik.pythonanywhere.com/media/Product/homechef.jpg"
 };
 
 export default Images;

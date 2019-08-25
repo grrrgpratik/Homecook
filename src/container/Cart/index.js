@@ -18,54 +18,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { toast } from "app_f/Omni";
 const { width, height } = Dimensions.get("window");
 
-const mocks = [
-  {
-    id: 1,
-    user: {
-      name: "Chicken Momo",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    saved: true,
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Santorini",
-    description:
-      "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC",
-    rating: 4.3,
-    price: 224.0,
-    reviews: 3212,
-    preview:
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80"
-    ]
-  },
-  {
-    id: 2,
-    user: {
-      name: "Fried Rice",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    saved: false,
-    location: "0.4 Km from you",
-    temperature: 34,
-    title: "Loutraki",
-    description: "This attractive small town, 80 kilometers from Athens",
-    rating: 4.6,
-    reviews: 3212,
-    price: 122.0,
-    preview:
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1446903572544-8888a0e60687?auto=format&fit=crop&w=800&q=80"
-    ]
-  }
-];
-
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -492,15 +444,9 @@ const styles = StyleSheet.create({
     padding: 12
   },
   buttonContainer: {
-    // position: "absolute",
-    // bottom: -15,
-    // left: 0,
-    // right: 0,
     paddingHorizontal: 32,
-
     justifyContent: "center",
     paddingBottom: 20
-    //alignItems: "flex-start"
   },
   regularText: {
     color: Color.black,

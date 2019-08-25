@@ -1,5 +1,4 @@
 const baseUrl = "http://grgpratik.pythonanywhere.com";
-//const baseUrl = "http://172.20.10.3:8000";
 
 const loginUrl = baseUrl + "/api/accounts/login/";
 

@@ -11,7 +11,7 @@ import {
   TouchableHighlight,
   ActivityIndicator
 } from "react-native";
-import { Color, Config } from "common_f";
+import { Color, Config, Images } from "common_f";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import {
   CustomButton,
@@ -122,7 +122,9 @@ class UserProfile extends PureComponent {
     {
       return (
         <Image
-          source={{ uri: "https://randomuser.me/api/portraits/women/44.jpg" }}
+          source={{
+            uri: Images.UserImage
+          }}
           resizeMode="cover"
           style={{ width, height: width }}
         />

@@ -34,11 +34,11 @@ class Signup extends Component {
       confirm: "visibility-off",
       password: true,
       confirmPassword: true,
-      email: "",
-      fullname: "",
-      phonenumber: "",
-      passwordtext: "",
-      confirmPasswordText: "",
+      email: "shreezana.magar@gmail.com",
+      fullname: "Srijana Shrees Magar",
+      phonenumber: "980766666",
+      passwordtext: "test123",
+      confirmPasswordText: "test123",
       errors: []
     };
   }

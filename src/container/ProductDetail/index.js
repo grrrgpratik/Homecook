@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   TouchableHighlight
 } from "react-native";
-import { Color, Config } from "common_f";
+import { Color, Config, Images } from "common_f";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
@@ -150,7 +150,7 @@ class ProductDetail extends PureComponent {
               <Image
                 style={styles.avatar}
                 source={{
-                  uri: "https://randomuser.me/api/portraits/women/44.jpg"
+                  uri: Images.UserImage
                 }}
               />
             </TouchableHighlight>
@@ -244,8 +244,7 @@ class ProductDetail extends PureComponent {
                       <Image
                         style={styles.reviewAvatar}
                         source={{
-                          uri:
-                            "https://randomuser.me/api/portraits/women/44.jpg"
+                          uri: Images.UserImage
                         }}
                       />
                       <Text

@@ -91,10 +91,7 @@ class Map extends Component {
       .catch(err => toast(err));
   };
 
-  // this.props.onLocationPick({
-  //   latitude: coords.latitude,
-  //   longitude: coords.longitude
-  // });
+
 
   setLocation = () => {};
 

@@ -51,7 +51,7 @@ class Delivery extends Component {
   handleAddProduct = cartid => {
     this._modal_2_LoadingSpinnerOverLay.show();
     let data = new FormData();
-    data.append("fullname", this.state.name);
+    data.append("full_name", this.state.name);
     data.append("street_address", this.state.streetaddress);
     data.append("city", this.state.city);
     data.append("state", this.state.state1);

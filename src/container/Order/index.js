@@ -13,8 +13,7 @@ import {
   ProgressBarAndroid,
   ActivityIndicatorIOS
 } from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { TabView, TabBar } from "react-native-tab-view";
 import { Color, Images, Config } from "common_f";
 import fetch from "react-native-fetch-polyfill";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -23,6 +22,7 @@ import moment from "moment";
 
 class Route extends Component {
   renderItem = (item, index) => {
+    console.log("inside route rneder", item);
     return (
       <View
         style={[
@@ -65,15 +65,28 @@ class Route extends Component {
                 justifyContent: "space-between"
               }}
             >
-              <Text
-                style={{
-                  color: Color.black,
-                  fontSize: 16,
-                  fontFamily: "Nunito-Bold"
-                }}
-              >
-                {item.item.full_name}
-              </Text>
+              {item.item.full_name === null ? (
+                <Text
+                  style={{
+                    color: Color.black,
+                    fontSize: 16,
+                    fontFamily: "Nunito-Bold"
+                  }}
+                >
+                  Pratik Gurung
+                </Text>
+              ) : (
+                <Text
+                  style={{
+                    color: Color.black,
+                    fontSize: 16,
+                    fontFamily: "Nunito-Bold"
+                  }}
+                >
+                  {item.item.full_name}
+                </Text>
+              )}
+
               <Text
                 style={{
                   color: Color.gray,
@@ -125,7 +138,7 @@ class Route extends Component {
             >
               {moment(item.item.date_created).format("MMMM D, YYYY")}
             </Text>
-            <Text
+            {/* <Text
               style={{
                 color: Color.secondary,
                 fontFamily: "Nunito-Bold",
@@ -133,7 +146,7 @@ class Route extends Component {
               }}
             >
               Detail
-            </Text>
+            </Text> */}
           </View>
         </View>
       </View>

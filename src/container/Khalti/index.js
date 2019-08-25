@@ -50,7 +50,7 @@ class Khalti extends Component {
       },
       body: JSON.stringify({
         app_id: "155f3594-6eaa-4f62-b68b-9dead60f99e7",
-        include_player_ids: ["7a5ca2ab-24a1-4808-b812-78a78ba0df63"],
+        included_segments: ["All"],
         contents: {
           en: "Hi Cook, You have received a new order"
         }

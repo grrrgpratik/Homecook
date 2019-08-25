@@ -7,7 +7,7 @@ import OneSignal from "react-native-onesignal";
 class ReduxWrapper extends Component {
   constructor(properties) {
     super(properties);
-    OneSignal.init("155f3594-6eaa-4f62-b68b-9dead60f99e7");
+    OneSignal.init("c929fa7e-7bb4-44d3-9ccf-fc1bff63beeb");
 
     OneSignal.addEventListener("received", this.onReceived);
     OneSignal.addEventListener("opened", this.onOpened);
